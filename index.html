@@ -1,76 +1,79 @@
 <!doctype html>
 <html lang="hi">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>🌅 AK Motivation v4 — Inspiring Portal</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AK Motivation v3.7 — Modal & Background Fixed</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg1:#fff7eb;--bg2:#ffe6d1;--card:rgba(255,255,255,0.75);--glass:rgba(255,255,255,0.55);--muted:#6b7280;--accent:#ff6f2d;--accent2:#ffb36b;--glass-border:rgba(255,255,255,0.6)}
+:root{--bg1:#021026;--bg2:#07193a;--muted:#b8c7db;--accent:#6ee7ff;--accent2:#9b6bff}
 *{box-sizing:border-box;font-family:Poppins, 'Noto Sans Devanagari', system-ui, sans-serif}
-html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#111;overflow-y:auto}
-/* animated sunrise background */
-.sunrise{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 10%, rgba(255,216,180,0.6), transparent 25%), linear-gradient(180deg, rgba(255,230,210,0.35), transparent 40%);animation:sky 14s linear infinite alternate;mix-blend-mode:screen;filter:blur(10px);}
-@keyframes sky{from{transform:translateY(-6px) scale(1)}to{transform:translateY(6px) scale(1.02)}}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#e6eef8}
+/* Aurora background (below content) */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(600px 200px at 10% 10%, rgba(155,107,255,0.12), transparent 10%),
+  radial-gradient(500px 160px at 90% 20%, rgba(110,231,255,0.08), transparent 10%),
+  linear-gradient(180deg, rgba(15,23,42,0.35), transparent 35%);
+filter:blur(18px);animation:float 12s ease-in-out infinite}
+@keyframes float{0%{transform:translateY(-6px)}50%{transform:translateY(6px)}100%{transform:translateY(-6px)}}
 
-/* layout */
 .container{position:relative;z-index:2;max-width:1100px;margin:28px auto;padding:20px}
 .header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 8px 30px rgba(255,110,60,0.12)}
-.header .right{display:flex;gap:10px;align-items:center}
-.search{padding:8px 12px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);min-width:220px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#021026;font-weight:800}
+.title{font-size:18px;margin:0}
+.subtitle{color:var(--muted);font-size:13px;margin-top:4px}
+.controls{display:flex;gap:10px;align-items:center}
+.search{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;min-width:220px}
 
-/* tabs */
-.tabs{display:flex;gap:8px;margin:8px 0 18px 0;flex-wrap:wrap}
-.tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer;font-weight:600}
-.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;box-shadow:0 8px 30px rgba(255,110,60,0.12)}
+.tabs{display:flex;gap:8px;margin:12px 0 18px 0;flex-wrap:wrap}
+.tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer;color:var(--muted);font-weight:600}
+.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#021026;box-shadow:0 8px 30px rgba(155,107,255,0.12)}
 
-/* grid */
 .layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
-@media(max-width:980px){ .layout{grid-template-columns:1fr} .logo{width:48px;height:48px} .search{min-width:140px} }
+@media(max-width:980px){ .layout{grid-template-columns:1fr} .logo{width:48px;height:48px} .search{min-width:140px}}
 
-/* glass card */
 .list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.card{background:var(--glass);backdrop-filter: blur(6px);border-radius:12px;padding:14px;border:1px solid var(--glass-border);box-shadow:0 10px 30px rgba(10,10,10,0.06);cursor:pointer;transition:transform .22s ease,box-shadow .22s}
-.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(10,10,10,0.12)}
+.card{background:rgba(255,255,255,0.03);border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 8px 30px rgba(2,8,23,0.4);cursor:pointer;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 60px rgba(2,8,23,0.6)}
 .card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:10px}
-.card .txt{font-size:15px;line-height:1.6;color:#111}
+.txt{font-size:15px;color:#eaf4ff;line-height:1.6;white-space:pre-wrap}
 
-/* small actions */
-.actions{display:flex;gap:8px;align-items:center;margin-top:10px;justify-content:space-between}
+.actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
 .leftmeta{color:var(--muted);font-size:13px}
-.btn{padding:8px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);background:rgba(255,255,255,0.9);cursor:pointer;font-weight:700}
-.iconbtn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:white;cursor:pointer}
+.rightbtns{display:flex;gap:8px}
+.iconbtn{padding:8px 10px;border-radius:9px;border:none;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));color:inherit;cursor:pointer;font-weight:700}
 
-/* reader modal */
-.reader-backdrop{display:none;position:fixed;inset:0;background:rgba(4,4,8,0.6);z-index:999;align-items:center;justify-content:center;padding:20px}
-.reader{background:linear-gradient(180deg,#fff,#fff8f2);max-width:940px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(7,7,10,0.6);animation:pop .24s}
-.reader img{width:100%;height:420px;object-fit:cover;background:#000}
-.reader .content{padding:22px;max-height:62vh;overflow:auto}
-.reader h2{margin:0 0 8px 0;font-size:22px}
-.reader p{font-size:18px;line-height:1.8;color:#222;white-space:pre-wrap}
-.reader .foot{display:flex;justify-content:space-between;align-items:center;padding:14px;border-top:1px solid #f0e0d8}
+/* modal/backdrop now above everything */
+.backdrop{display:none;position:fixed;inset:0;z-index:9999;background:rgba(1,4,12,0.7);align-items:center;justify-content:center;padding:20px}
+.modal{background:linear-gradient(180deg,#071428,#0b2238);max-width:980px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 30px 100px rgba(2,6,23,0.8);animation:pop .22s;position:relative;z-index:10000}
+.modal img{width:100%;height:440px;object-fit:contain;background:#000}
+.modal .content{padding:22px;max-height:70vh;overflow:auto}
+.modal h2{margin:0 0 8px 0;font-size:22px;color:#e6f6ff}
+.modal p{font-size:18px;line-height:1.8;color:#eaf4ff;white-space:pre-wrap}
+.modal .foot{display:flex;justify-content:space-between;align-items:center;padding:14px;border-top:1px solid rgba(255,255,255,0.03)}
 
-/* dashboard */
-.sidebar{background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.5));padding:16px;border-radius:12px;border:1px solid var(--glass-border);backdrop-filter: blur(6px)}
+/* smaller add/edit modal */
+.addmodal{max-width:760px;padding:14px}
+
+/* sidebar/dashboard */
+.sidebar{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
 .table{width:100%;border-collapse:collapse;margin-top:10px}
-.table th,.table td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.05);font-size:13px}
-.table th{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;border:none}
+.table th,.table td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.02);font-size:13px;color:#e8f4ff}
+.table th{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#021026;border:none}
 
-/* footer */
 .footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:40px}
-
-/* utilities */
 .hidden{display:none}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#021026;color:#eaf4ff;padding:10px 14px;border-radius:10px;opacity:0;transition:opacity .2s;z-index:12000}
 </style>
 </head>
 <body>
-<div class="sunrise" aria-hidden></div>
-<div class="container">
+<div class="aurora" aria-hidden></div>
+
+<div class="container" id="appContainer">
   <header class="header">
-    <div class="brand"><div class="logo">AK</div><div><h1 style="margin:0;font-size:18px">AK Motivation</h1><div style="color:var(--muted);font-size:13px">शायरी • विचार • प्रेरणा</div></div></div>
-    <div class="right">
+    <div class="brand"><div class="logo">AK</div><div><div class="title">AK Motivation</div><div class="subtitle">शायरी · विचार · प्रेरणा</div></div></div>
+    <div class="controls">
       <input id="search" class="search" placeholder="खोजें — प्रेरणा, शायरी..." />
       <div id="ownerArea"></div>
     </div>
@@ -88,11 +91,12 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(
   <div class="layout">
     <main>
       <div id="list" class="list" aria-live="polite"></div>
+
       <div id="dashboardArea" class="hidden" style="margin-top:14px">
-        <div style="padding:12px;background:rgba(255,255,255,0.9);border-radius:12px;border:1px solid rgba(0,0,0,0.04)">
+        <div class="sidebar">
           <h3 style="margin:0 0 8px 0">Owner Dashboard</h3>
           <table class="table" id="dashTable"><thead><tr><th>Item</th><th>Likes</th><th>Shares</th><th>Views</th></tr></thead><tbody></tbody></table>
-          <div style="margin-top:8px"><button id="exportBtn" class="btn">Export JSON</button></div>
+          <div style="margin-top:8px"><button id="exportBtn" class="iconbtn">Export JSON</button></div>
         </div>
       </div>
     </main>
@@ -101,164 +105,217 @@ html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(
       <h4 style="margin:0 0 8px 0">Shayari Categories</h4>
       <div id="categoryTabs" style="display:flex;flex-direction:column;gap:8px"></div>
       <div style="margin-top:12px">
-        <button id="addBtn" class="btn hidden">+ Add</button>
-        <button id="addCatBtn" class="btn hidden" style="margin-left:8px">+ Category</button>
+        <button id="addBtn" class="iconbtn hidden">+ Add</button>
+        <button id="addCatBtn" class="iconbtn hidden" style="margin-left:8px">+ Category</button>
       </div>
       <div style="margin-top:14px;color:var(--muted);font-size:13px">Owner-only: Add / Edit / Delete / Dashboard</div>
     </aside>
   </div>
 
-  <div class="footer">AK Motivation • v4 — Inspiring look</div>
+  <div class="footer">AK Motivation • v3.7 — Fixed</div>
 </div>
 
-<!-- Add/Edit Modal -->
-<div id="modal" class="reader-backdrop"><div class="reader"><div style="padding:14px"><h3 id="modalTitle">Add</h3>
-  <form id="form"><div style="display:flex;gap:8px;flex-direction:column">
-  <select id="typeSel" style="padding:8px;border-radius:8px"><option value="shayari">Shayari</option><option value="quotes">Quotes</option><option value="stories">Stories</option><option value="lines">Lines</option><option value="images">Image Only</option></select>
-  <input id="title" placeholder="Title (optional)" style="padding:8px;border-radius:8px"/>
-  <textarea id="text" rows="6" placeholder="Text (leave empty for image-only)" style="padding:8px;border-radius:8px"></textarea>
-  <input id="author" placeholder="Author (optional)" style="padding:8px;border-radius:8px"/>
-  <input id="tags" placeholder="Tags, comma" style="padding:8px;border-radius:8px"/>
-  <input id="imageInput" type="file" accept="image/*"/>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
-    <button type="button" id="cancelBtn" class="btn">Cancel</button>
-    <button type="submit" class="btn">Save</button>
-  </div></div></form>
-</div></div>
-
-<!-- Reader Modal -->
-<div id="readerBackdrop" class="reader-backdrop"><div class="reader" role="dialog" aria-modal="true">
-  <div id="readerImageWrap"></div>
-  <div class="content">
-    <h2 id="readerTitle"></h2>
-    <p id="readerText"></p>
-  </div>
-  <div class="foot">
-    <div id="readerMeta" style="color:var(--muted)"></div>
-    <div style="display:flex;gap:8px">
-      <button id="readerLike" class="iconbtn">❤ Like</button>
-      <button id="readerCopy" class="iconbtn">📋 Copy</button>
-      <button id="readerShare" class="iconbtn">🔗 Share</button>
-      <button id="readerEdit" class="iconbtn hidden">Edit</button>
-      <button id="readerClose" class="iconbtn">Close</button>
+<!-- Add/Edit Modal (high z-index) -->
+<div id="addBackdrop" class="backdrop" aria-hidden>
+  <div class="modal addmodal" role="dialog" aria-modal="true">
+    <div style="padding:12px">
+      <h3 id="modalTitle">Add Item</h3>
+      <form id="form">
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <select id="typeSel" style="padding:8px;border-radius:8px"><option value="shayari">Shayari</option><option value="quotes">Quotes</option><option value="stories">Stories</option><option value="lines">Lines</option><option value="images">Image Only</option></select>
+          <input id="title" placeholder="Title (optional)" style="padding:8px;border-radius:8px"/>
+          <textarea id="text" rows="6" placeholder="Text (leave empty for image-only)" style="padding:8px;border-radius:8px"></textarea>
+          <input id="author" placeholder="Author (optional)" style="padding:8px;border-radius:8px"/>
+          <input id="tags" placeholder="Tags, comma" style="padding:8px;border-radius:8px"/>
+          <input id="imageInput" type="file" accept="image/*"/>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
+            <button type="button" id="cancelBtn" class="iconbtn">Cancel</button>
+            <button type="submit" class="iconbtn">Save</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-</div></div>
+</div>
 
-<div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#111;color:#fff;padding:8px 12px;border-radius:10px;opacity:0;transition:opacity .2s;z-index:1200">Copied</div>
+<!-- Reader Modal (high z-index) -->
+<div id="readerBackdrop" class="backdrop" aria-hidden>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div id="readerImageWrap"></div>
+    <div class="content">
+      <h2 id="readerTitle"></h2>
+      <p id="readerText"></p>
+    </div>
+    <div class="foot">
+      <div id="readerMeta" style="color:var(--muted)"></div>
+      <div style="display:flex;gap:8px">
+        <button id="readerLike" class="iconbtn">❤ Like</button>
+        <button id="readerCopy" class="iconbtn">📋 Copy</button>
+        <button id="readerShare" class="iconbtn">🔗 Share</button>
+        <button id="readerEdit" class="iconbtn hidden">Edit</button>
+        <button id="readerClose" class="iconbtn">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast">Copied</div>
 
 <script>
-const OWNER='akimran', PASS='143143', STORAGE='ak_v4_v1';
+// Owner credentials
+const OWNER = 'akimran', PASS = '143143', STORAGE = 'ak_v3_7_storage_v1';
+const AUTO_LOGOUT_MS = 3 * 60 * 1000;
+
+// default data
 const defaultData = {
-  quotes:[{id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— ए. पी. जे. अब्दुल कलाम',likes:12,shares:2,views:10,image:null}],
+  quotes:[{id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— A.P.J. Abdul Kalam',likes:12,shares:2,views:10,image:null}],
   stories:[],
   lines:[],
-  shayari:{"Couple Shayari":[{id:11,text:'तुम्हारे बिना अधूरी सी मेरी हर सुबह',author:'— अनजान',likes:3,shares:0,views:5,image:null}]},
+  shayari:{
+    "Couple Shayari":[{id:11,text:'तुम्हारे बिना अधूरी सी मेरी हर सुबह',author:'— अनजान',likes:3,shares:0,views:5,image:null}],
+    "Attitude Shayari":[{id:12,text:'मैं अपनी राह खुद बनाता हूँ — तुझे देख कर नहीं बदलता।',author:'—',likes:1,shares:0,views:2,image:null}],
+    "Friendship Shayari":[{id:13,text:'दोस्ती वो नहीं जो साथ में हँसाती है, दोस्ति तो वो होती है जो आँसू पोंछ लेती है।',author:'—',likes:2,shares:0,views:3,image:null}],
+    "Rishte Shayari":[{id:14,text:'रिश्तों की कदर करो — यही जीवन का असली धन है।',author:'—',likes:2,shares:0,views:3,image:null}]
+  },
   images:[],
-  categories:["Couple Shayari"]
+  categories:["Couple Shayari","Attitude Shayari","Friendship Shayari","Rishte Shayari"],
+  settings:{daily:{type:'quotes',id:1}}
 };
-let db = load(), active='shayari', owner=false, current=null, editing=null;
 
-function load(){ try{ const s=localStorage.getItem(STORAGE); if(s) return JSON.parse(s);}catch(e){} localStorage.setItem(STORAGE, JSON.stringify(defaultData)); return JSON.parse(JSON.stringify(defaultData)); }
+// state
+let db = load(), active='shayari', owner=false, lastActivity = Date.now(), currentItem = null;
+
+// helpers
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+function load(){ try{ const raw = localStorage.getItem(STORAGE); if(raw) return JSON.parse(raw); }catch(e){} localStorage.setItem(STORAGE, JSON.stringify(defaultData)); return JSON.parse(JSON.stringify(defaultData)); }
 function save(){ localStorage.setItem(STORAGE, JSON.stringify(db)); }
 
-function $(q){ return document.querySelector(q) }
-function qs(q){ return document.querySelectorAll(q) }
-
 // init
-renderTabs();
-renderCats();
+renderOwnerArea();
+rebuildCategories();
 renderList();
-setupOwnerArea();
-attachUI();
+attachEvents();
 
-function renderTabs(){ qs('.tab').forEach(t=> t.addEventListener('click', (e)=>{ qs('.tab').forEach(x=>x.classList.remove('active')); e.target.classList.add('active'); active=e.target.dataset.tab; renderList(); })) }
+function attachEvents(){
+  $$('#tabs .tab').forEach(t=> t.addEventListener('click', (e)=>{ $$('#tabs .tab').forEach(x=>x.classList.remove('active')); e.currentTarget.classList.add('active'); active = e.currentTarget.dataset.tab; renderList(); }));
+  $('#search').addEventListener('input', debounce(renderList,200));
+  $('#addBtn').addEventListener('click', openAddModal);
+  $('#cancelBtn').addEventListener('click', closeAddModal);
+  $('#form').addEventListener('submit', onSave);
+  $('#imageInput').addEventListener('change', handleImageSelect);
+  $('#readerClose').addEventListener('click', closeReader);
+  $('#readerLike').addEventListener('click', ()=>{ if(currentItem){ currentItem.likes = (currentItem.likes||0)+1; save(); updateReaderMeta(); renderList(); } });
+  $('#readerShare').addEventListener('click', ()=>{ if(currentItem){ currentItem.shares = (currentItem.shares||0)+1; save(); updateReaderMeta(); copy(generateUrl(active,currentItem.id)); showToast('Link copied'); renderList(); } });
+  $('#readerCopy').addEventListener('click', ()=>{ if(currentItem){ copy(currentItem.text||currentItem.content||''); showToast('Copied'); } });
+  $('#addCatBtn').addEventListener('click', ()=>{ if(!owner) return alert('Owner only'); const name = prompt('New category name'); if(!name) return; if(db.categories.includes(name)) return alert('Category exists'); db.categories.push(name); db.shayari[name]=[]; save(); rebuildCategories(); showToast('Category added'); });
+  $('#exportBtn').addEventListener('click', ()=>{ const a=document.createElement('a'); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); a.href=URL.createObjectURL(blob); a.download='ak_backup_v3_7.json'; a.click(); });
+  window.addEventListener('mousemove', updateLastActivity); window.addEventListener('keydown', updateLastActivity);
+  setInterval(()=>{ if(!owner) return; if(Date.now()-lastActivity > AUTO_LOGOUT_MS){ doLogout(); alert('Auto-logout due to inactivity (3 minutes)'); } }, 1000);
+}
 
-function renderCats(){
+function renderOwnerArea(){
+  const area = $('#ownerArea'); area.innerHTML='';
+  if(sessionStorage.getItem('ak_owner_active')){ owner=true; }
+  if(owner){
+    const s = document.createElement('span'); s.textContent = 'Owner: '+OWNER; s.style.marginRight='8px';
+    const btn = document.createElement('button'); btn.className='iconbtn'; btn.textContent='Logout'; btn.addEventListener('click', ()=>{ doLogout(); });
+    area.appendChild(s); area.appendChild(btn); $('#addBtn').classList.remove('hidden'); $('#addCatBtn').classList.remove('hidden'); $('#dashboardTab').classList.remove('hidden'); buildDashboard();
+  } else {
+    const btn = document.createElement('button'); btn.className='iconbtn'; btn.textContent='Owner Login'; btn.addEventListener('click', ()=> showLogin()); area.appendChild(btn); $('#addBtn').classList.add('hidden'); $('#addCatBtn').classList.add('hidden'); $('#dashboardTab').classList.add('hidden'); $('#dashboardArea').classList.add('hidden');
+  }
+}
+
+function showLogin(){ const u = prompt('Owner Username:'); if(u===null) return; const p = prompt('Password:'); if(p===null) return; if(u===OWNER && p===PASS){ owner = true; sessionStorage.setItem('ak_owner_active','1'); lastActivity = Date.now(); renderOwnerArea(); renderList(); buildDashboard(); alert('Owner mode on'); } else alert('Invalid'); }
+function doLogout(){ owner=false; sessionStorage.removeItem('ak_owner_active'); renderOwnerArea(); renderList(); alert('Logged out'); }
+
+function rebuildCategories(){
   const wrap = $('#categoryTabs'); wrap.innerHTML='';
-  (db.categories||[]).forEach(c=>{ const b=document.createElement('button'); b.textContent=c; b.className='btn'; b.style.display='block'; b.style.marginBottom='8px'; b.addEventListener('click', ()=>{ active='shayari'; renderList(c); }); wrap.appendChild(b); });
+  (db.categories||[]).forEach(cat=>{ const b=document.createElement('button'); b.className='iconbtn'; b.textContent = cat; b.style.display='block'; b.addEventListener('click', ()=>{ active='shayari'; renderList(cat); }); wrap.appendChild(b); });
 }
 
 function renderList(cat){
   const list = $('#list'); list.innerHTML='';
-  let items=[];
+  const q = ($('#search').value||'').toLowerCase().trim();
+  let items = [];
   if(active==='quotes') items = db.quotes || [];
   else if(active==='stories') items = db.stories || [];
   else if(active==='lines') items = db.lines || [];
-  else if(active==='shayari') items = (cat ? db.shayari[cat]||[] : db.shayari[db.categories[0]]||[]) ;
+  else if(active==='shayari') items = (cat ? db.shayari[cat]||[] : db.shayari[db.categories[0]]||[]);
   else if(active==='images') items = db.images || [];
-  items.forEach(it=>{ const card=document.createElement('div'); card.className='card'; if(it.image){ const img=document.createElement('img'); img.src=it.image; card.appendChild(img); } if(it.text||it.content){ const p=document.createElement('div'); p.className='txt'; p.textContent = it.title ? (it.title + '\\n' + (it.content||it.text||'')) : (it.text||it.content||''); card.appendChild(p); } const meta=document.createElement('div'); meta.className='actions'; const left=document.createElement('div'); left.className='leftmeta'; left.textContent=''; const right=document.createElement('div'); right.style.display='flex'; right.style.gap='8px'; // like/share/copy buttons (card-level)
-    const like=document.createElement('button'); like.className='iconbtn'; like.textContent='❤ '+(it.likes||0); like.addEventListener('click',(e)=>{ e.stopPropagation(); it.likes=(it.likes||0)+1; save(); showToast('Liked'); renderList(); });
-    const share=document.createElement('button'); share.className='iconbtn'; share.textContent='🔗'; share.title='Share'; share.addEventListener('click',(e)=>{ e.stopPropagation(); it.shares=(it.shares||0)+1; save(); copy(generateUrl(active,it.id)); showToast('Link copied'); });
-    const copyBtn=document.createElement('button'); copyBtn.className='iconbtn'; copyBtn.textContent='📋'; copyBtn.title='Copy Link'; copyBtn.addEventListener('click',(e)=>{ e.stopPropagation(); copy(generateUrl(active,it.id)); showToast('Link copied'); });
+  items = items.filter(it=> { const txt = ((it.title||'')+' '+(it.text||it.content||'')+' '+(it.author||'')).toLowerCase(); return q ? txt.includes(q) : true; });
+  if(items.length===0){ $('#list').innerHTML = '<div style="color:var(--muted)">कोई आइटम नहीं मिला।</div>'; return; }
+  items.forEach(it=>{
+    const card = document.createElement('div'); card.className='card';
+    if(it.image){ const img = document.createElement('img'); img.src = it.image; card.appendChild(img); }
+    if((it.text||it.content) && !(active==='images' && !it.text && it.image)){ const p = document.createElement('div'); p.className='txt'; p.textContent = it.title ? (it.title + '\n' + (it.content||it.text||'')) : (it.text||it.content||''); card.appendChild(p); }
+    const actions = document.createElement('div'); actions.className='actions';
+    const left = document.createElement('div'); left.className='leftmeta'; left.textContent = it.author ? it.author : '';
+    const right = document.createElement('div'); right.className='rightbtns';
+    const like = document.createElement('button'); like.className='iconbtn'; like.textContent = '❤ ' + (it.likes||0);
+    like.addEventListener('click', (e)=>{ e.stopPropagation(); it.likes = (it.likes||0)+1; save(); renderList(); });
+    const share = document.createElement('button'); share.className='iconbtn'; share.textContent='🔗'; share.title='Share'; share.addEventListener('click',(e)=>{ e.stopPropagation(); it.shares = (it.shares||0)+1; save(); copy(generateUrl(active,it.id)); showToast('Link copied'); renderList(); });
+    const copyBtn = document.createElement('button'); copyBtn.className='iconbtn'; copyBtn.textContent='📋'; copyBtn.title='Copy link'; copyBtn.addEventListener('click',(e)=>{ e.stopPropagation(); copy(generateUrl(active,it.id)); showToast('Link copied'); });
     right.appendChild(like); right.appendChild(share); right.appendChild(copyBtn);
-    meta.appendChild(left); meta.appendChild(right); card.appendChild(meta);
+    actions.appendChild(left); actions.appendChild(right);
+    card.appendChild(actions);
     card.addEventListener('click', ()=> openReader(it));
     list.appendChild(card);
   });
-  $('#dashTable tbody').innerHTML='';
   if(owner) buildDashboard();
 }
 
-function generateUrl(t,id){ const u=new URL(location.href); u.searchParams.set('t',t); u.searchParams.set('id',id); return u.toString(); }
-
 function openReader(it){
-  it.views = (it.views||0)+1; save(); current=it;
-  $('#readerImageWrap').innerHTML=''; if(it.image){ const img=document.createElement('img'); img.src=it.image; $('#readerImageWrap').appendChild(img); }
-  $('#readerTitle').textContent = it.title||''; $('#readerText').textContent = it.text||it.content||'';
+  it.views = (it.views||0) + 1; save();
+  currentItem = it;
+  $('#readerImageWrap').innerHTML = '';
+  if(it.image){ const img = document.createElement('img'); img.src = it.image; $('#readerImageWrap').appendChild(img); }
+  $('#readerTitle').textContent = it.title || '';
+  $('#readerText').textContent = (it.content || it.text || '') + (it.author ? '\n\n' + it.author : '');
   $('#readerMeta').textContent = `Likes: ${it.likes||0} • Shares: ${it.shares||0} • Views: ${it.views||0}`;
   $('#readerEdit').classList.toggle('hidden', !owner);
-  $('#readerBackdrop').style.display='flex';
+  $('#readerBackdrop').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
   history.pushState({},'', generateUrl(active,it.id));
 }
 
-$('#readerClose').addEventListener('click', ()=>{ $('#readerBackdrop').style.display='none'; history.pushState({},'', location.pathname); });
+function closeReader(){ $('#readerBackdrop').style.display = 'none'; currentItem = null; document.body.style.overflow = ''; history.pushState({}, '', location.pathname); }
 
-$('#readerLike').addEventListener('click', ()=>{ if(current){ current.likes=(current.likes||0)+1; save(); $('#readerMeta').textContent = `Likes: ${current.likes} • Shares: ${current.shares||0} • Views: ${current.views||0}`; renderList(); showToast('Liked'); } });
-$('#readerCopy').addEventListener('click', ()=>{ if(current){ copy(current.text||current.content||''); showToast('Copied'); } });
-$('#readerShare').addEventListener('click', ()=>{ if(current){ current.shares=(current.shares||0)+1; save(); const url=generateUrl(active,current.id); copy(url); showToast('Link copied'); $('#readerMeta').textContent = `Likes: ${current.likes||0} • Shares: ${current.shares||0} • Views: ${current.views||0}`; renderList(); } });
+// Add modal helpers (fixed layering + scroll lock)
+function openAddModal(){ $('#addBackdrop').style.display = 'flex'; document.body.style.overflow = 'hidden'; $('#modalTitle').textContent = 'Add Item'; $('#form').reset(); $('#imageInput').value=''; $('#imageInput').dataset.base64=''; }
+function closeAddModal(){ $('#addBackdrop').style.display = 'none'; document.body.style.overflow = ''; }
 
-// add/edit modal logic (owner-only)
-$('#addBtn').addEventListener('click', ()=>{ editing=null; $('#modal').style.display='flex'; $('#modalTitle').textContent='Add Item'; });
-$('#cancelBtn').addEventListener('click', ()=>{ $('#modal').style.display='none'; });
-$('#form').addEventListener('submit', (e)=>{ e.preventDefault(); const type=$('#typeSel').value; const title=$('#title').value.trim(); const text=$('#text').value.trim(); const author=$('#author').value.trim(); const tags=$('#tags').value.split(',').map(s=>s.trim()).filter(Boolean); const img = $('#imageInput').dataset.base64 || null;
-  const obj={id:Date.now(),likes:0,shares:0,views:0,tags:tags,image:img};
-  if(type==='stories'){ obj.title=title; obj.content=text; db.stories.unshift(obj); }
-  else if(type==='quotes'){ obj.text=text; obj.author=author; db.quotes.unshift(obj); }
-  else if(type==='lines'){ obj.text=text; db.lines.unshift(obj); }
-  else if(type==='shayari'){ obj.text=text; obj.author=author; const cat=db.categories[0]; if(!db.shayari[cat]) db.shayari[cat]=[]; db.shayari[cat].unshift(obj); }
-  else if(type==='images'){ obj.text=text||''; if(!db.images) db.images=[]; db.images.unshift(obj); }
-  save(); $('#modal').style.display='none'; $('#imageInput').value=''; $('#imageInput').dataset.base64=''; renderList(); renderCats(); showToast('Saved'); });
+function handleImageSelect(e){ const f = e.target.files[0]; if(!f) return; const r = new FileReader(); r.onload = (ev)=>{ $('#imageInput').dataset.base64 = ev.target.result; showToast('Image selected'); }; r.readAsDataURL(f); }
 
-// image input to base64
-$('#imageInput').addEventListener('change', (e)=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=(ev)=>{ $('#imageInput').dataset.base64 = ev.target.result; showToast('Image selected'); }; r.readAsDataURL(f); });
+function onSave(e){ e.preventDefault(); if(!sessionStorage.getItem('ak_owner_active')){ alert('Only owner can add'); closeAddModal(); return; } const type = $('#typeSel').value; const title = $('#title').value.trim(); const text = $('#text').value.trim(); const author = $('#author').value.trim(); const tags = ($('#tags').value||'').split(',').map(s=>s.trim()).filter(Boolean); const img = $('#imageInput').dataset.base64 || null;
+  const obj = { id: Date.now(), likes:0, shares:0, views:0, tags: tags, image: img };
+  if(type==='quotes'){ obj.text = text; obj.author = author; db.quotes.unshift(obj); }
+  else if(type==='stories'){ obj.title = title; obj.content = text; db.stories.unshift(obj); }
+  else if(type==='lines'){ obj.text = text; db.lines.unshift(obj); }
+  else if(type==='shayari'){ obj.text = text; obj.author = author; const cat = prompt('Choose category name (existing or new):', db.categories[0]); if(!cat) return alert('Category required'); if(!db.categories.includes(cat)){ db.categories.push(cat); db.shayari[cat]=[]; } db.shayari[cat].unshift(obj); }
+  else if(type==='images'){ obj.text = text || ''; if(!db.images) db.images=[]; db.images.unshift(obj); }
+  save(); closeAddModal(); renderList(); rebuildCategories(); showToast('Saved'); }
 
-// owner area & dashboard
-function setupOwnerArea(){
-  const a = $('#ownerArea'); a.innerHTML=''; if(owner){ const span=document.createElement('div'); span.textContent='Owner: '+OWNER; span.style.marginRight='8px'; const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Logout'; btn.addEventListener('click', ()=>{ owner=false; save(); setupOwnerArea(); renderList(); }); a.appendChild(span); a.appendChild(btn); $('#addBtn').classList.remove('hidden'); $('#addCatBtn').classList.remove('hidden'); $('#dashboardTab').classList.remove('hidden'); } else { const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Owner Login'; btn.addEventListener('click', ()=>{ const u=prompt('Username'); if(u===OWNER){ const p=prompt('Password'); if(p===PASS){ owner=true; setupOwnerArea(); renderList(); buildDashboard(); alert('Owner mode on'); } else alert('Wrong password'); } else alert('Wrong user'); }); a.appendChild(btn); } }
+function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.style.opacity = 1; setTimeout(()=> t.style.opacity = 0, 1600); }
+function copy(text){ try{ navigator.clipboard.writeText(text); }catch(e){ const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } }
+function debounce(fn, ms){ let t; return (...a)=>{ clearTimeout(t); t = setTimeout(()=> fn(...a), ms); }; }
 
-function buildDashboard(){ if(!owner) return; const tbody = $('#dashTable tbody'); tbody.innerHTML=''; const rows=[]; (db.quotes||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); (db.stories||[]).forEach(it=> rows.push({title:(it.title||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); Object.keys(db.shayari||{}).forEach(cat=> (db.shayari[cat]||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0}))); (db.images||[]).forEach(it=> rows.push({title:'Image',likes:it.likes||0,shares:it.shares||0,views:it.views||0})); rows.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${escapeHtml(r.title)}</td><td>${r.likes}</td><td>${r.shares}</td><td>${r.views}</td>`; tbody.appendChild(tr); }); $('#exportBtn').addEventListener('click', ()=>{ const a=document.createElement('a'); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); a.href=URL.createObjectURL(blob); a.download='ak_backup_v4.json'; a.click(); }); $('#dashboardArea').classList.remove('hidden'); }
+function generateUrl(t,id){ const url = new URL(location.href); url.searchParams.set('t', t); url.searchParams.set('id', id); return url.toString(); }
 
-// utilities
-function copy(t){ try{ navigator.clipboard.writeText(t); }catch(e){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } }
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.opacity=1; setTimeout(()=> t.style.opacity=0,1600); }
+function buildDashboard(){ if(!sessionStorage.getItem('ak_owner_active')) return; $('#dashboardArea').classList.remove('hidden'); const tbody = $('#dashTable tbody'); tbody.innerHTML = ''; const rows = []; (db.quotes||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); (db.stories||[]).forEach(it=> rows.push({title:(it.title||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); Object.keys(db.shayari||{}).forEach(cat=> (db.shayari[cat]||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0}))); (db.images||[]).forEach(it=> rows.push({title:'Image',likes:it.likes||0,shares:it.shares||0,views:it.views||0})); rows.forEach(r=>{ const tr = document.createElement('tr'); tr.innerHTML = `<td>${escapeHtml(r.title)}</td><td>${r.likes}</td><td>${r.shares}</td><td>${r.views}</td>`; tbody.appendChild(tr); }); }
+
 function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// initial behaviors: check query params to open reader if present
-(function(){ const params=new URLSearchParams(location.search); const t=params.get('t'); const id=params.get('id'); if(t && id){ // search item
-    let found=null;
-    if(t==='quotes') found=(db.quotes||[]).find(x=>String(x.id)===String(id));
-    if(t==='stories') found=(db.stories||[]).find(x=>String(x.id)===String(id));
-    if(t==='lines') found=(db.lines||[]).find(x=>String(x.id)===String(id));
-    if(t==='shayari'){ for(const c of db.categories||[]){ const f=(db.shayari[c]||[]).find(x=>String(x.id)===String(id)); if(f){ found=f; break; } } }
-    if(t==='images') found=(db.images||[]).find(x=>String(x.id)===String(id));
-    if(found) setTimeout(()=> openReader(found), 400);
-  } })();
+// initial load and query open
+(function(){ const params = new URLSearchParams(location.search); const t = params.get('t'); const id = params.get('id'); if(t && id){ let found=null; if(t==='quotes') found = (db.quotes||[]).find(x=>String(x.id)===String(id)); if(t==='stories') found = (db.stories||[]).find(x=>String(x.id)===String(id)); if(t==='lines') found = (db.lines||[]).find(x=>String(x.id)===String(id)); if(t==='shayari'){ for(const c of db.categories||[]){ const f = (db.shayari[c]||[]).find(x=>String(x.id)===String(id)); if(f){ found=f; break; } } } if(t==='images') found = (db.images||[]).find(x=>String(x.id)===String(id)); if(found) setTimeout(()=> openReader(found), 300); } })();
 
-// expose some helpers
-window.saveDB = save;
-window.db = db;
+// load/save (expose for debug)
+function load(){ try{ const raw = localStorage.getItem(STORAGE); if(raw) return JSON.parse(raw); }catch(e){} localStorage.setItem(STORAGE, JSON.stringify(defaultData)); return JSON.parse(JSON.stringify(defaultData)); }
+function save(){ localStorage.setItem(STORAGE, JSON.stringify(db)); }
 
+// expose for debug
+window.db = db; window.saveDB = save;
 </script>
 </body>
 </html>

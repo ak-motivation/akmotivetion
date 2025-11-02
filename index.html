@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>🌅 AK Motivation — Secure Portal</title>
+<title>🌅 AK Motivation — Full Portal (Shayari + Owner)</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fafafa;--card:#ffffff;--muted:#6b7280;--accent:#ff6f2d;--accent2:#ffb36b;--border:#eee}
@@ -15,14 +15,11 @@ a{color:inherit;text-decoration:none}
 .logo{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#fff,#fff7f1);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);}
 .brand h1{margin:0;font-size:22px;color:var(--accent);font-weight:800}
 .brand p{margin:0;font-size:13px;color:var(--muted)}
-
 .nav{display:flex;gap:10px;align-items:center}
 .btn{padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:white;cursor:pointer;font-weight:600}
 .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;border:none;box-shadow:0 8px 24px rgba(255,110,60,0.12)}
 .btn.ghost{background:transparent;border:1px solid var(--border)}
-
 .layout{display:grid;grid-template-columns: 1fr 320px;gap:24px;align-items:start}
-.main{}
 .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .tabs{display:flex;gap:8px}
 .tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer}
@@ -30,29 +27,26 @@ a{color:inherit;text-decoration:none}
 
 .list-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card{background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border);box-shadow:0 8px 30px rgba(10,10,10,0.04)}
-.card h3{margin:0;font-size:16px;color:#111}
 .card p{margin:8px 0;color:#222;line-height:1.5}
-.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:var(--muted)}
-
-.tag{display:inline-block;background:#fff6f0;color:var(--accent);padding:6px 8px;border-radius:999px;border:1px solid rgba(255,110,60,0.06);margin-right:6px;font-size:13px}
-
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:var(--muted)}
 .actions{display:flex;gap:8px;align-items:center}
-.like{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);cursor:pointer;background:transparent}
-.like .heart{font-size:15px;transition:transform .2s ease;color:#777}
-.like .heart.filled{color:#ff3b6e;filter:drop-shadow(0 8px 20px rgba(255,59,110,0.12))}
-.share{padding:6px 10px;border-radius:999px;border:1px solid var(--border);cursor:pointer;background:transparent}
-
+.like, .share, .copy-link {display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);cursor:pointer;background:transparent}
+.copy-link{border-style:dashed}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1;pointer-events:auto}
 .sidebar{position:sticky;top:24px;background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border)}
 .sidebar h4{margin:0 0 10px 0}
-.tag-cloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-
-.login-area{display:flex;gap:8px;align-items:center}
-.login-area input{padding:8px;border-radius:8px;border:1px solid var(--border)}
+.tag{display:inline-block;background:#fff6f0;color:var(--accent);padding:6px 8px;border-radius:999px;border:1px solid rgba(255,110,60,0.06);margin-right:6px;font-size:13px}
+.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.cat{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:white;cursor:pointer}
+.cat.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
 
 .footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:40px}
-
-/* responsive */
 @media (max-width:900px){ .layout{grid-template-columns:1fr}.list-grid{grid-template-columns:1fr} .logo{width:52px;height:52px} }
+.small{padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer}
+.input{padding:8px;border:1px solid #ddd;border-radius:8px;width:100%}
+.modal{display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:80}
+.modal .box{background:white;padding:16px;border-radius:8px;max-width:720px;width:100%}
 </style>
 </head>
 <body>
@@ -60,13 +54,11 @@ a{color:inherit;text-decoration:none}
   <header class="header">
     <div class="brand">
       <div class="logo" aria-hidden><svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#fff"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="12" font-weight="700" fill="#ff6f2d">AK</text></svg></div>
-      <div><h1>🌅 AK Motivation</h1><p>हिंदी प्रेरणादायक कोट्स — Secure Owner Mode</p></div>
+      <div><h1>🌅 AK Motivation</h1><p>Quotes • Stories • Shayari — Owner mode secured</p></div>
     </div>
     <nav class="nav">
-      <input id="search" placeholder="खोजें..." style="padding:8px 10px;border-radius:8px;border:1px solid var(--border)" />
-      <div id="ownerControls" class="login-area">
-        <!-- will be filled by JS -->
-      </div>
+      <input id="search" class="input" placeholder="खोजें — प्रेरणा, शायरी..." style="min-width:220px" />
+      <div id="ownerControls" class="login-area"></div>
     </nav>
   </header>
 
@@ -74,92 +66,117 @@ a{color:inherit;text-decoration:none}
     <section class="main">
       <div class="section-title">
         <div class="tabs" role="tablist">
+          <div class="tab" data-tab="quotes">विचार</div>
           <div class="tab" data-tab="stories">कहानियाँ</div>
-          <div class="tab active" data-tab="quotes">विचार</div>
+          <div class="tab active" data-tab="shayari">Shayari Zone</div>
           <div class="tab" data-tab="lines">पंक्तियाँ</div>
         </div>
         <div style="color:var(--muted)"><span id="count">0</span> items</div>
       </div>
 
-      <div id="list" class="list-grid" aria-live="polite"></div>
-
+      <!-- Quotes/Stories/Lines/Shayari listing -->
+      <div id="listArea">
+        <div id="list" class="list-grid" aria-live="polite"></div>
+      </div>
     </section>
 
     <aside class="sidebar">
       <h4>Daily Inspiration</h4>
       <div id="daily">"हर सुबह एक नया मौका है।"</div>
       <hr style="margin:12px 0;border:none;border-top:1px solid var(--border)" />
+      <h4>Shayari Categories</h4>
+      <div id="categoryTabs" class="category-tabs"></div>
+      <div style="margin-top:10px">
+        <button id="addCategoryBtn" class="small" style="display:none">+ नई Category जोड़ें</button>
+      </div>
+      <hr style="margin:12px 0;border:none;border-top:1px solid var(--border)" />
       <h4>Tags</h4>
-      <div id="tagCloud" class="tag-cloud"></div>
+      <div id="tagCloud" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
       <div style="margin-top:12px">
         <button id="addBtn" class="btn primary" style="display:none">+ जोड़ें</button>
       </div>
-      <div style="margin-top:12px;color:var(--muted);font-size:12px">Owner-only: Add / Edit / Delete</div>
+      <div style="margin-top:12px;color:var(--muted);font-size:12px">Owner-only: Add / Edit / Delete / Add Category</div>
     </aside>
   </main>
 
-  <div class="footer">AK Motivation • Secure Owner Mode • Offline-ready</div>
+  <div class="footer">AK Motivation • Shayari-ready • Offline • Owner-secured</div>
 </div>
 
-<!-- modal form -->
-<div id="modal" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.45)">
-  <div style="background:white;padding:18px;border-radius:8px;max-width:680px;margin:20px">
-    <h3 id="modalTitle">नया जोड़ें</h3>
-    <form id="form">
-      <div style="margin-top:8px">
-        <label>टाइप</label><br />
-        <select id="typeSel"><option value="quotes">विचार</option><option value="stories">कहानी</option><option value="lines">पंक्ति</option></select>
-      </div>
-      <div id="titleRow" style="display:none;margin-top:8px">
-        <label>शीर्षक</label><br />
-        <input id="title" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px" />
-      </div>
-      <div style="margin-top:8px">
-        <label>मूल टेक्स्ट</label><br />
-        <textarea id="text" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px" rows="6"></textarea>
-      </div>
-      <div style="margin-top:8px">
-        <label>लेखक (वैकल्पिक)</label><br />
-        <input id="author" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px" />
-      </div>
-      <div style="margin-top:8px">
-        <label>Tags (comma separated)</label><br />
-        <input id="tags" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px" />
-      </div>
-      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-        <button type="button" id="cancel">रद्द करें</button>
-        <button type="submit" class="btn primary">सहेजें</button>
-      </div>
-    </form>
+<!-- Modals -->
+<div id="modal" class="modal"><div class="box">
+  <h3 id="modalTitle">नया जोड़ें</h3>
+  <form id="form">
+    <div style="margin-top:8px"><label>Type</label><br>
+      <select id="typeSel" class="input"><option value="quotes">विचार</option><option value="stories">कहानी</option><option value="shayari">शायरी (Category)</option><option value="lines">पंक्ति</option></select>
+    </div>
+    <div id="catSelectRow" style="margin-top:8px;display:none">
+      <label>Shayari Category</label><br>
+      <select id="shayariCatSelect" class="input"></select>
+    </div>
+    <div id="titleRow" style="margin-top:8px;display:none">
+      <label>शीर्षक</label><br>
+      <input id="title" class="input" />
+    </div>
+    <div style="margin-top:8px">
+      <label>Text</label><br>
+      <textarea id="text" class="input" rows="6"></textarea>
+    </div>
+    <div style="margin-top:8px">
+      <label>Author (optional)</label><br>
+      <input id="author" class="input" />
+    </div>
+    <div style="margin-top:8px">
+      <label>Tags (comma)</label><br>
+      <input id="tags" class="input" placeholder="उदा. प्रेरणा, प्यार" />
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
+      <button type="button" id="cancel" class="small">रद्द करें</button>
+      <button type="submit" class="btn primary">सहेजें</button>
+    </div>
+  </form>
+</div></div>
+
+<!-- Category modal -->
+<div id="catModal" class="modal"><div class="box">
+  <h3>नई Category जोड़ें</h3>
+  <div style="margin-top:8px"><input id="newCatName" class="input" placeholder="उदा. Couple Shayari" /></div>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
+    <button id="cancelCat" class="small">रद्द करें</button>
+    <button id="saveCat" class="btn primary">Add Category</button>
   </div>
-</div>
+</div></div>
+
+<div id="toast" class="toast">Copied to clipboard</div>
 
 <script>
-// OWNER CREDENTIALS (local-only)
+// Owner credentials (local)
 const OWNER_USER = 'akimran';
 const OWNER_PASS = '143143';
 const AUTO_LOGOUT_MS = 3 * 60 * 1000; // 3 minutes inactivity
+const STORAGE = 'ak_final_shayari_v1';
 
-const STORAGE = 'ak_secure_v1';
 const defaultData = {
-  quotes:[
-    {id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— ए. पी. जे. अब्दुल कलाम',tags:['सपने','प्रेरणा'],likes:12},
-    {id:2,text:'कर्म ही पूजा है।',author:'— अनजान',tags:['कर्म'],likes:8},
-  ],
-  stories:[
-    {id:1,title:'छोटा कदम, बड़ी जीत',content:'एक छोटे से गाँव का लड़का रोज़ पढ़ता रहा और सफलता पायी।',tags:['प्रेरणा'],likes:4}
-  ],
-  lines:[
-    {id:1,text:'हार मत मानो — आज की मेहनत कल का फल है।',tags:['हिम्मत'],likes:2}
-  ],
+  quotes:[{id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— ए. पी. जे. अब्दुल कलाम',tags:['सपने','प्रेरणा'],likes:12}],
+  stories:[{id:1,title:'छोटा कदम, बड़ी जीत',content:'एक छोटे से गाँव का लड़का रोज़ पढ़ता रहा और सफलता पायी।',tags:['प्रेरणा'],likes:4}],
+  lines:[{id:1,text:'हार मत मानो — आज की मेहनत कल का फल है।',tags:['हिम्मत'],likes:2}],
+  // Shayari stored as object: categoryName -> array of items
+  shayari: {
+    "Couple Shayari":[{id:1,text:'तुम्हारे बिना अधूरी सी मेरी हर सुबह',author:'— अनजान',tags:['प्यार'],likes:3}],
+    "Attitude Shayari":[{id:1,text:'मैं अपनी राह खुद बनाता हूँ — तुझे देख कर नहीं बदलता।',author:'—',tags:['अटिट्यूड'],likes:1}],
+    "Friendship Shayari":[{id:1,text:'दोस्ती वो नहीं जो साथ में हँसाती है, दोस्ती तो वो होती है जो आँसू पोंछ लेती है।',author:'—',tags:['दोस्ती'],likes:2}],
+    "Rishte Shayari":[{id:1,text:'रिश्तों की कदर करो — यही जीवन का असली धन है।',author:'—',tags:['रिश्ता'],likes:2}]
+  },
+  // dynamic categories list (owner can add)
+  categories:["Couple Shayari","Attitude Shayari","Friendship Shayari","Rishte Shayari"],
   settings:{daily:{type:'quotes',id:1}}
 };
 
 let db = load();
-let active = 'quotes';
+let active = 'shayari'; // default tab
+let shayariActiveCategory = db.categories && db.categories[0] ? db.categories[0] : 'Couple Shayari';
 let owner = false;
-let inactivityTimer = null;
 let lastActivity = Date.now();
+let editing = null;
 
 // DOM refs
 const list = document.getElementById('list');
@@ -179,6 +196,14 @@ const countEl = document.getElementById('count');
 const tagCloud = document.getElementById('tagCloud');
 const daily = document.getElementById('daily');
 const ownerControls = document.getElementById('ownerControls');
+const toast = document.getElementById('toast');
+const categoryTabs = document.getElementById('categoryTabs');
+const addCategoryBtn = document.getElementById('addCategoryBtn');
+const catModal = document.getElementById('catModal');
+const newCatName = document.getElementById('newCatName');
+const cancelCat = document.getElementById('cancelCat');
+const saveCat = document.getElementById('saveCat');
+const shayariCatSelect = document.getElementById('shayariCatSelect');
 
 init();
 
@@ -195,6 +220,7 @@ function save(){ localStorage.setItem(STORAGE, JSON.stringify(db)); }
 function init(){
   attach();
   checkOwnerSessionOnLoad();
+  rebuildAllCategoriesUI();
   rebuildTags();
   render();
   renderDaily();
@@ -204,12 +230,15 @@ function init(){
 function attach(){
   tabs.forEach(t=>t.addEventListener('click', ()=>{ tabs.forEach(x=>x.classList.remove('active')); t.classList.add('active'); active = t.dataset.tab; render(); }));
   search.addEventListener('input', debounce(render,250));
-  addBtn.addEventListener('click', ()=>{ openAddModal(); });
-  cancel.addEventListener('click', ()=>{ closeModal(); });
+  addBtn.addEventListener('click', ()=> openAddModal());
+  cancel.addEventListener('click', ()=> closeModal());
   form.addEventListener('submit', onSave);
-  document.addEventListener('mousemove', resetInactivity);
-  document.addEventListener('keydown', resetInactivity);
-  document.addEventListener('click', resetInactivity);
+  addCategoryBtn.addEventListener('click', ()=> { if(isOwner()){ catModal.style.display='flex'; } else showLoginPrompt(); });
+  cancelCat.addEventListener('click', ()=> { catModal.style.display='none'; newCatName.value=''; });
+  saveCat.addEventListener('click', saveNewCategory);
+  document.addEventListener('mousemove', updateLastActivity);
+  document.addEventListener('keydown', updateLastActivity);
+  document.addEventListener('click', updateLastActivity);
   renderOwnerControls();
 }
 
@@ -217,168 +246,19 @@ function renderOwnerControls(){
   ownerControls.innerHTML = '';
   if(isOwner()){
     const span = document.createElement('span'); span.textContent = 'Owner: ' + OWNER_USER;
-    const logout = document.createElement('button'); logout.className='btn ghost'; logout.textContent='Logout'; logout.addEventListener('click', ()=>{ doLogout(); });
+    const logout = document.createElement('button'); logout.className='btn ghost'; logout.textContent='Logout'; logout.addEventListener('click', ()=> doLogout());
     ownerControls.appendChild(span);
     ownerControls.appendChild(logout);
     addBtn.style.display = 'inline-block';
+    addCategoryBtn.style.display = 'inline-block';
   } else {
     const loginBtn = document.createElement('button'); loginBtn.className='btn primary'; loginBtn.textContent='Owner Login'; loginBtn.addEventListener('click', showLoginPrompt);
     ownerControls.appendChild(loginBtn);
     addBtn.style.display = 'none';
+    addCategoryBtn.style.display = 'none';
   }
 }
 
-function showLoginPrompt(){
-  const u = prompt('Owner Username:');
-  if(u === null) return;
-  const p = prompt('Password:');
-  if(p === null) return;
-  if(u === OWNER_USER && p === OWNER_PASS){
-    doLogin();
-    alert('Login सफल — आप owner mode में हैं।');
-  } else alert('Invalid credentials');
-}
-
-function doLogin(){
-  owner = true;
-  sessionStorage.setItem('ak_owner_active','1');
-  updateLastActivity();
-  renderOwnerControls();
-  render(); // to show edit/delete buttons
-}
-
-function doLogout(){
-  owner = false;
-  sessionStorage.removeItem('ak_owner_active');
-  renderOwnerControls();
-  render();
-  alert('Logged out');
-}
-
-function checkOwnerSessionOnLoad(){
-  const s = sessionStorage.getItem('ak_owner_active');
-  if(s){ owner = true; updateLastActivity(); }
-  renderOwnerControls();
-}
-
-function isOwner(){ return owner === true; }
-
-function startInactivityWatcher(){
-  if(inactivityTimer) clearInterval(inactivityTimer);
-  inactivityTimer = setInterval(()=>{
-    if(!isOwner()) return;
-    const now = Date.now();
-    if(now - lastActivity > AUTO_LOGOUT_MS){
-      doLogout();
-      alert('Auto-logout due to inactivity (3 minutes).');
-    }
-  }, 1000);
-}
-
-function resetInactivity(){ updateLastActivity(); }
-
-function updateLastActivity(){ lastActivity = Date.now(); }
-
-function openAddModal(){ editing = null; document.getElementById('modalTitle').textContent='नया जोड़ें'; form.reset(); typeSel.value = active; titleRow.style.display = active==='stories' ? 'block' : 'none'; modal.style.display='flex'; }
-
-function closeModal(){ modal.style.display='none'; form.reset(); }
-
-function render(){
-  const q = (search.value||'').toLowerCase().trim();
-  const arr = (db[active]||[]).filter(it=>{
-    const txt = ((it.title||'')+' '+(it.text||it.content||'')+' '+(it.author||'')).toLowerCase();
-    return q? txt.includes(q) : true;
-  });
-  list.innerHTML='';
-  countEl.textContent = arr.length;
-  if(arr.length===0){ list.innerHTML = '<div style="color:#777">कोई आइटम नहीं मिला।</div>'; return; }
-  arr.forEach(it=>{
-    const card = document.createElement('article'); card.className='card';
-    if(active==='stories'){
-      card.innerHTML = `<h3>${escape(it.title||'Untitled')}</h3><p>${escape(it.content||'')}</p>`;
-    } else if(active==='quotes'){
-      card.innerHTML = `<p style="font-weight:600">"${escape(it.text||'')}"</p><div style="margin-top:8px;color:var(--muted)">${escape(it.author||'')}</div>`;
-    } else {
-      card.innerHTML = `<p>${escape(it.text||'')}</p>`;
-    }
-    // tags
-    const tagWrap = document.createElement('div'); (it.tags||[]).forEach(t=>{ const s=document.createElement('span'); s.className='tag'; s.textContent = t; s.addEventListener('click', ()=>{ search.value = t; render(); }); tagWrap.appendChild(s); });
-    card.appendChild(tagWrap);
-    // meta area
-    const meta = document.createElement('div'); meta.className='meta';
-    const left = document.createElement('div'); left.textContent = '';
-    const actions = document.createElement('div'); actions.className='actions';
-
-    // Like and Share always visible for quotes & stories
-    if(active==='stories' || active==='quotes'){
-      const like = document.createElement('button'); like.className='like'; like.innerHTML = `<span class='heart' ${it.likes>0? 'data-filled=true':''}>❤</span><span style="margin-left:6px">${it.likes||0}</span>`;
-      like.addEventListener('click', ()=>{ it.likes = (it.likes||0)+1; save(); render(); });
-      const share = document.createElement('button'); share.className='share'; share.textContent='Share'; share.addEventListener('click', ()=>{ const txt = active==='stories' ? `${it.title}\n\n${it.content}` : `${it.text}\n\n${it.author||''}`; const full = `AK Motivation — ${txt}`; if(navigator.share){ navigator.share({title:'AK Motivation', text:full}).catch(()=>{}); } else { const u = encodeURIComponent(full + '\n\n' + location.href); window.open('https://wa.me/?text='+u); } });
-      actions.appendChild(like); actions.appendChild(share);
-    }
-
-    // Owner-only edit/delete
-    if(isOwner()){
-      const edit = document.createElement('button'); edit.className='btn'; edit.textContent='Edit'; edit.addEventListener('click', ()=>{ openEdit(it); });
-      const del = document.createElement('button'); del.className='btn'; del.textContent='Delete'; del.addEventListener('click', ()=>{ if(confirm('हटाएं?')){ db[active] = db[active].filter(x=>x.id!==it.id); save(); render(); rebuildTags(); }});
-      actions.appendChild(edit); actions.appendChild(del);
-    }
-
-    meta.appendChild(left); meta.appendChild(actions);
-    card.appendChild(meta);
-    list.appendChild(card);
-  });
-}
-
-function openEdit(it){
-  editing = it;
-  document.getElementById('modalTitle').textContent='संपादित करें';
-  typeSel.value = active;
-  titleRow.style.display = active==='stories' ? 'block' : 'none';
-  if(active==='stories'){ titleI.value = it.title; textI.value = it.content; } else if(active==='quotes'){ textI.value = it.text; authorI.value = it.author; } else { textI.value = it.text; }
-  modal.style.display='flex';
-}
-
-function onSave(e){
-  e.preventDefault();
-  if(!isOwner()){ alert('Only owner can add or edit'); modal.style.display='none'; return; }
-  const t = typeSel.value;
-  const tags = (tagsI.value||'').split(',').map(x=>x.trim()).filter(Boolean);
-  if(editing){
-    // update
-    if(t==='stories'){ editing.title = titleI.value; editing.content = textI.value; editing.tags = tags; }
-    else if(t==='quotes'){ editing.text = textI.value; editing.author = authorI.value; editing.tags = tags; }
-    else { editing.text = textI.value; editing.tags = tags; }
-    editing = null;
-  } else {
-    const obj = { id: Date.now(), likes:0, tags };
-    if(t==='stories'){ obj.title = titleI.value; obj.content = textI.value; db.stories.unshift(obj); }
-    else if(t==='quotes'){ obj.text = textI.value; obj.author = authorI.value; db.quotes.unshift(obj); }
-    else { obj.text = textI.value; db.lines.unshift(obj); }
-  }
-  save();
-  form.reset();
-  modal.style.display='none';
-  rebuildTags();
-  render();
-  renderDaily();
-}
-
-function renderDaily(){ const d = db.settings && db.settings.daily; if(!d){ daily.textContent=''; return; } const col = db[d.type]||[]; const it = col.find(x=>x.id===d.id); daily.textContent = it ? (d.type==='stories' ? it.title : (it.text||it.content)) : ''; }
-
-function rebuildTags(){ const s = new Set(); ['stories','quotes','lines'].forEach(k=> (db[k]||[]).forEach(i=> (i.tags||[]).forEach(t=> s.add(t)))); tagCloud.innerHTML=''; s.forEach(t=>{ const b = document.createElement('span'); b.className='tag'; b.textContent = t; b.addEventListener('click', ()=>{ search.value = t; render(); }); tagCloud.appendChild(b); }); }
-
-function checkOwnerSessionOnLoad(){ const s = sessionStorage.getItem('ak_owner_active'); if(s){ owner = true; updateLastActivity(); } renderOwnerControls(); }
-
-function doLogout(){ owner = false; sessionStorage.removeItem('ak_owner_active'); renderOwnerControls(); render(); alert('Logged out'); }
-
-function doLoginProgrammatic(){ owner = true; sessionStorage.setItem('ak_owner_active','1'); updateLastActivity(); renderOwnerControls(); render(); }
-
-function escape(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function debounce(f,ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>f(...a), ms); }; }
-
-// simple inline login prompt with credential check
 function showLoginPrompt(){
   const u = prompt('Owner Username:');
   if(u === null) return;
@@ -390,8 +270,20 @@ function showLoginPrompt(){
   } else alert('Invalid credentials');
 }
 
-// inactivity handling
-function updateLastActivity(){ lastActivity = Date.now(); }
+function doLoginProgrammatic(){
+  owner = true;
+  sessionStorage.setItem('ak_owner_active','1');
+  updateLastActivity();
+  renderOwnerControls();
+  render();
+}
+
+function doLogout(){ owner = false; sessionStorage.removeItem('ak_owner_active'); renderOwnerControls(); render(); alert('Logged out'); }
+
+function checkOwnerSessionOnLoad(){ const s = sessionStorage.getItem('ak_owner_active'); if(s){ owner = true; updateLastActivity(); } renderOwnerControls(); }
+
+function isOwner(){ return owner === true; }
+
 function startInactivityWatcher(){
   setInterval(()=>{
     if(!isOwner()) return;
@@ -402,16 +294,213 @@ function startInactivityWatcher(){
   }, 1000);
 }
 
-// expose login control as clickable element
-(function exposeLoginControls(){
-  renderOwnerControls();
-})();
+function updateLastActivity(){ lastActivity = Date.now(); }
 
-function renderOwnerControls(){ ownerControls.innerHTML = ''; if(isOwner()){ const span = document.createElement('span'); span.textContent = 'Owner: ' + OWNER_USER; const logout = document.createElement('button'); logout.className='btn ghost'; logout.textContent='Logout'; logout.addEventListener('click', ()=>{ doLogout(); }); ownerControls.appendChild(span); ownerControls.appendChild(logout); addBtn.style.display = 'inline-block'; } else { const loginBtn = document.createElement('button'); loginBtn.className='btn primary'; loginBtn.textContent='Owner Login'; loginBtn.addEventListener('click', showLoginPrompt); ownerControls.appendChild(loginBtn); addBtn.style.display = 'none'; } }
+function rebuildAllCategoriesUI(){
+  // build category tabs in sidebar and shayari select
+  categoryTabs.innerHTML='';
+  (db.categories||[]).forEach(cat => {
+    const b = document.createElement('button'); b.className='cat' + (cat===shayariActiveCategory ? ' active' : ''); b.textContent = cat;
+    b.addEventListener('click', ()=>{ shayariActiveCategory = cat; document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); });
+    categoryTabs.appendChild(b);
+  });
+  // refill select for adding shayari
+  shayariCatSelect.innerHTML='';
+  (db.categories||[]).forEach(cat => { const o = document.createElement('option'); o.value = cat; o.textContent = cat; shayariCatSelect.appendChild(o); });
+}
 
-// initialize inactivity watcher and owner check
-checkOwnerSessionOnLoad();
+function saveNewCategory(){
+  const name = (newCatName.value||'').trim();
+  if(!name){ alert('Category name लिखें'); return; }
+  if(!db.categories) db.categories=[];
+  if(db.categories.includes(name)){ alert('Category पहले से मौजूद है'); return; }
+  db.categories.push(name);
+  db.shayari[name] = [];
+  save();
+  rebuildAllCategoriesUI();
+  catModal.style.display='none';
+  newCatName.value='';
+  alert('Category added');
+}
+
+function openAddModal(){ editing = null; document.getElementById('modalTitle').textContent='नया जोड़ें'; form.reset(); typeSel.value = active==='shayari' ? 'shayari' : active; onTypeChange(); modal.style.display='flex'; }
+
+function closeModal(){ modal.style.display='none'; form.reset(); editing = null; }
+
+typeSel.addEventListener('change', onTypeChange);
+function onTypeChange(){
+  const t = typeSel.value;
+  titleRow.style.display = t==='stories' ? 'block' : 'none';
+  catSelectRow.style.display = t==='shayari' ? 'block' : 'none';
+}
+
+function render(){
+  const q = (search.value||'').toLowerCase().trim();
+  let arr = [];
+  if(active === 'quotes') arr = db.quotes || [];
+  else if(active === 'stories') arr = db.stories || [];
+  else if(active === 'lines') arr = db.lines || [];
+  else if(active === 'shayari') arr = db.shayari[shayariActiveCategory] || [];
+  // filter by search
+  arr = arr.filter(it => {
+    const txt = ((it.title||'')+' '+(it.text||it.content||'')+' '+(it.author||'')).toLowerCase();
+    return q ? txt.includes(q) : true;
+  });
+  list.innerHTML='';
+  countEl.textContent = arr.length;
+  if(arr.length === 0){ list.innerHTML = '<div style="color:#777">कोई आइटम नहीं मिला।</div>'; return; }
+  arr.forEach(it => {
+    const card = document.createElement('article'); card.className='card';
+    if(active==='stories'){
+      card.innerHTML = `<h3>${escape(it.title||'Untitled')}</h3><p>${escape(it.content||'')}</p>`;
+    } else if(active==='quotes'){
+      card.innerHTML = `<p style="font-weight:600">\"${escape(it.text||'')}\"</p><div style="margin-top:8px;color:var(--muted)">${escape(it.author||'')}</div>`;
+    } else if(active==='lines'){
+      card.innerHTML = `<p>${escape(it.text||'')}</p>`;
+    } else { // shayari
+      card.innerHTML = `<p style="font-weight:600">\"${escape(it.text||'')}\"</p><div style="margin-top:8px;color:var(--muted)">${escape(it.author||'')}</div>`;
+    }
+    // tags
+    const tagWrap = document.createElement('div');
+    (it.tags||[]).forEach(t => { const s = document.createElement('span'); s.className='tag'; s.textContent = t; s.addEventListener('click', ()=>{ search.value = t; render(); }); tagWrap.appendChild(s); });
+    card.appendChild(tagWrap);
+    // meta and actions
+    const meta = document.createElement('div'); meta.className='meta';
+    const left = document.createElement('div'); left.textContent = '';
+    const actions = document.createElement('div'); actions.className='actions';
+    // Like
+    if(active==='stories' || active==='quotes' || active==='shayari'){
+      const like = document.createElement('button'); like.className='like'; like.innerHTML = `<span class='heart' ${it.likes>0? 'data-filled=true':''}>❤</span><span style="margin-left:6px">${it.likes||0}</span>`;
+      like.addEventListener('click', ()=>{ it.likes = (it.likes||0)+1; save(); render(); });
+      actions.appendChild(like);
+      const share = document.createElement('button'); share.className='share'; share.textContent='Share'; share.addEventListener('click', ()=>{
+        const txt = active==='stories' ? `${it.title}\n\n${it.content}` : `${it.text}\n\n${it.author||''}`;
+        const full = `AK Motivation — ${txt}`;
+        if(navigator.share){ navigator.share({title:'AK Motivation', text:full}).catch(()=>{}); } else { const u = encodeURIComponent(full + '\n\n' + location.href); window.open('https://wa.me/?text='+u); }
+      });
+      actions.appendChild(share);
+      // copy link available to all
+      const copyBtn = document.createElement('button'); copyBtn.className='copy-link'; copyBtn.textContent='Copy Link';
+      copyBtn.addEventListener('click', ()=>{
+        const url = generateItemUrl(active, it.id, active==='shayari' ? shayariActiveCategory : null);
+        copyToClipboard(url);
+        showToast('Link copied — paste to WhatsApp/Facebook/X');
+      });
+      actions.appendChild(copyBtn);
+    }
+    // owner-only buttons
+    if(isOwner()){
+      const edit = document.createElement('button'); edit.className='btn ghost'; edit.textContent='Edit'; edit.addEventListener('click', ()=> openEdit(it));
+      const del = document.createElement('button'); del.className='btn ghost'; del.textContent='Delete'; del.addEventListener('click', ()=>{ if(confirm('हटाएं?')){ removeItem(it.id); save(); rebuildAllCategoriesUI(); render(); rebuildTags(); }});
+      actions.appendChild(edit); actions.appendChild(del);
+    }
+    meta.appendChild(left); meta.appendChild(actions);
+    card.appendChild(meta);
+    list.appendChild(card);
+  });
+}
+
+function removeItem(id){
+  if(active==='quotes') db.quotes = (db.quotes||[]).filter(x=>x.id!==id);
+  else if(active==='stories') db.stories = (db.stories||[]).filter(x=>x.id!==id);
+  else if(active==='lines') db.lines = (db.lines||[]).filter(x=>x.id!==id);
+  else if(active==='shayari') db.shayari[shayariActiveCategory] = (db.shayari[shayariActiveCategory]||[]).filter(x=>x.id!==id);
+}
+
+function openEdit(it){
+  editing = it;
+  document.getElementById('modalTitle').textContent='संपादित करें';
+  typeSel.value = active==='shayari' ? 'shayari' : active;
+  onTypeChange();
+  if(active==='stories'){ titleI.value = it.title; textI.value = it.content; }
+  else if(active==='quotes'){ textI.value = it.text; authorI.value = it.author; }
+  else if(active==='shayari'){ textI.value = it.text; authorI.value = it.author; shayariCatSelect.value = shayariActiveCategory; }
+  else { textI.value = it.text; }
+  modal.style.display='flex';
+}
+
+function onSave(e){
+  e.preventDefault();
+  if(!isOwner()){ alert('Only owner can add/edit'); modal.style.display='none'; return; }
+  const t = typeSel.value;
+  const tags = (tagsI.value||'').split(',').map(s=>s.trim()).filter(Boolean);
+  if(editing){
+    if(t==='stories'){ editing.title = titleI.value; editing.content = textI.value; editing.tags = tags; }
+    else if(t==='quotes'){ editing.text = textI.value; editing.author = authorI.value; editing.tags = tags; }
+    else if(t==='lines'){ editing.text = textI.value; editing.tags = tags; }
+    else if(t==='shayari'){ editing.text = textI.value; editing.author = authorI.value; editing.tags = tags; // move category if changed
+      const targetCat = shayariCatSelect.value;
+      // if category changed, remove from old and add to new
+      if(!db.shayari[targetCat]) db.shayari[targetCat]=[];
+      // update in place if same category, else move
+      // simple approach: remove by id and push updated
+      removeItem(editing.id);
+      db.shayari[targetCat].unshift(editing);
+    }
+    editing = null;
+  } else {
+    const obj = { id: Date.now(), likes:0, tags };
+    if(t==='stories'){ obj.title = titleI.value; obj.content = textI.value; db.stories.unshift(obj); }
+    else if(t==='quotes'){ obj.text = textI.value; obj.author = authorI.value; db.quotes.unshift(obj); }
+    else if(t==='lines'){ obj.text = textI.value; db.lines.unshift(obj); }
+    else if(t==='shayari'){ obj.text = textI.value; obj.author = authorI.value; const cat = shayariCatSelect.value || shayariActiveCategory; if(!db.shayari[cat]) db.shayari[cat]=[]; db.shayari[cat].unshift(obj); }
+  }
+  save();
+  form.reset();
+  modal.style.display='none';
+  rebuildAllCategoriesUI();
+  rebuildTags();
+  render();
+  renderDaily();
+}
+
+function generateItemUrl(type, id, cat){
+  const base = location.origin + location.pathname;
+  const params = new URLSearchParams();
+  params.set('t', type);
+  params.set('id', id);
+  if(cat) params.set('cat', cat);
+  return `${base}?${params.toString()}`;
+}
+
+function copyToClipboard(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).catch(()=> fallbackCopy(text)); }
+  else fallbackCopy(text);
+}
+function fallbackCopy(text){ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); }
+
+function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=> toast.classList.remove('show'), 2000); }
+
+function renderDaily(){ const d = db.settings && db.settings.daily; if(!d){ daily.textContent=''; return; } const col = db[d.type]||[]; const it = col.find(x=>x.id===d.id); daily.textContent = it ? (d.type==='stories' ? it.title : (it.text||it.content)) : ''; }
+
+function rebuildTags(){ const s = new Set(); ['stories','quotes','lines'].forEach(k=> (db[k]||[]).forEach(i=> (i.tags||[]).forEach(t=> s.add(t)))); // include shayari tags
+  Object.values(db.shayari||{}).forEach(arr => arr.forEach(i=> (i.tags||[]).forEach(t=> s.add(t))));
+  tagCloud.innerHTML=''; s.forEach(t => { const b = document.createElement('span'); b.className='tag'; b.textContent=t; b.addEventListener('click', ()=>{ search.value = t; render(); }); tagCloud.appendChild(b); });
+}
+
+function generateUrlFromQuery(){ const params = new URLSearchParams(location.search); const t = params.get('t'); const id = params.get('id'); const cat = params.get('cat'); if(t && id){ active = t; tabs.forEach(x=>x.classList.remove('active')); const tabEl = Array.from(tabs).find(x=>x.dataset.tab===t); if(tabEl) tabEl.classList.add('active'); if(t==='shayari' && cat){ shayariActiveCategory = cat; rebuildAllCategoriesUI(); } render(); // optionally scroll to first card
+    setTimeout(()=>{ const first = document.querySelector('.card'); if(first) first.scrollIntoView({behavior:'smooth',block:'center'}); }, 400);
+  }
+}
+
+function escape(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function debounce(fn,ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
+
+// simple inline login prompt
+function showLoginPrompt(){ const u = prompt('Owner Username:'); if(u===null) return; const p = prompt('Password:'); if(p===null) return; if(u===OWNER_USER && p===OWNER_PASS){ doLoginProgrammatic(); alert('Login सफल — owner mode on'); } else alert('Invalid credentials'); }
+function doLogout(){ owner=false; sessionStorage.removeItem('ak_owner_active'); renderOwnerControls(); render(); alert('Logged out'); }
+function doLoginProgrammatic(){ owner=true; sessionStorage.setItem('ak_owner_active','1'); updateLastActivity(); renderOwnerControls(); render(); }
+function checkOwnerSessionOnLoad(){ const s = sessionStorage.getItem('ak_owner_active'); if(s){ owner=true; updateLastActivity(); } renderOwnerControls(); }
+function isOwner(){ return owner===true; }
+function updateLastActivity(){ lastActivity = Date.now(); }
+function startInactivityWatcher(){ setInterval(()=>{ if(!isOwner()) return; if(Date.now() - lastActivity > AUTO_LOGOUT_MS){ doLogout(); alert('Auto-logout due to inactivity (3 minutes).'); } }, 1000); }
+
+// init UI
+renderOwnerControls();
+rebuildAllCategoriesUI();
 startInactivityWatcher();
+generateUrlFromQuery();
+
 </script>
 </body>
 </html>

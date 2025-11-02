@@ -2,168 +2,128 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>🌅 AK Motivation — Reader View + Image Upload</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🌅 AK Motivation v4 — Inspiring Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fafafa;--card:#ffffff;--muted:#6b7280;--accent:#ff6f2d;--accent2:#ffb36b;--border:#eee}
-*{box-sizing:border-box}html,body{height:100%;margin:0;font-family:Inter, 'Noto Sans Devanagari', system-ui, -apple-system, Roboto, sans-serif;background:var(--bg);color:#111}
-.container{max-width:1100px;margin:28px auto;padding:0 16px}
-.header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#fff,#fff7f1);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);}
-.brand h1{margin:0;font-size:22px;color:var(--accent);font-weight:800}
-.brand p{margin:0;font-size:13px;color:var(--muted)}
-.nav{display:flex;gap:10px;align-items:center}
-.btn{padding:8px 12px;border-radius:6px;border:1px solid var(--border);background:white;cursor:pointer;font-weight:600}
-.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;border:none;box-shadow:0 8px 24px rgba(255,110,60,0.12)}
-.btn.ghost{background:transparent;border:1px solid var(--border)}
-.layout{display:grid;grid-template-columns: 1fr 340px;gap:24px;align-items:start}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.tabs{display:flex;gap:8px}
-.tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer}
-.tab.active{background:white;border:1px solid var(--border);box-shadow:0 6px 20px rgba(10,10,10,0.04)}
+:root{--bg1:#fff7eb;--bg2:#ffe6d1;--card:rgba(255,255,255,0.75);--glass:rgba(255,255,255,0.55);--muted:#6b7280;--accent:#ff6f2d;--accent2:#ffb36b;--glass-border:rgba(255,255,255,0.6)}
+*{box-sizing:border-box;font-family:Poppins, 'Noto Sans Devanagari', system-ui, sans-serif}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg1),var(--bg2));color:#111;overflow-y:auto}
+/* animated sunrise background */
+.sunrise{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 10%, rgba(255,216,180,0.6), transparent 25%), linear-gradient(180deg, rgba(255,230,210,0.35), transparent 40%);animation:sky 14s linear infinite alternate;mix-blend-mode:screen;filter:blur(10px);}
+@keyframes sky{from{transform:translateY(-6px) scale(1)}to{transform:translateY(6px) scale(1.02)}}
 
-.list-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.card{background:var(--card);padding:12px;border-radius:8px;border:1px solid var(--border);box-shadow:0 8px 30px rgba(10,10,10,0.04);cursor:pointer}
-.card img{max-width:100%;border-radius:8px;margin-bottom:8px;display:block}
-.card p{margin:6px 0;color:#222;line-height:1.6;white-space:pre-wrap}
-.line-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;border-radius:6px}
-.line-text{flex:1;min-width:0;padding-right:8px}
-.line-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
-.like-line, .copy-line, .share-line {padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:13px}
+/* layout */
+.container{position:relative;z-index:2;max-width:1100px;margin:28px auto;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 8px 30px rgba(255,110,60,0.12)}
+.header .right{display:flex;gap:10px;align-items:center}
+.search{padding:8px 12px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);min-width:220px}
 
-.meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:13px;color:var(--muted)}
-.actions{display:flex;gap:8px;align-items:center}
+/* tabs */
+.tabs{display:flex;gap:8px;margin:8px 0 18px 0;flex-wrap:wrap}
+.tab{padding:8px 12px;border-radius:999px;background:transparent;border:1px solid transparent;cursor:pointer;font-weight:600}
+.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;box-shadow:0 8px 30px rgba(255,110,60,0.12)}
 
-.copy-link{border-style:dashed}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;background:#111;color:#fff;padding:10px 14px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .2s}
-.toast.show{opacity:1;pointer-events:auto}
+/* grid */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+@media(max-width:980px){ .layout{grid-template-columns:1fr} .logo{width:48px;height:48px} .search{min-width:140px} }
+
+/* glass card */
+.list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--glass);backdrop-filter: blur(6px);border-radius:12px;padding:14px;border:1px solid var(--glass-border);box-shadow:0 10px 30px rgba(10,10,10,0.06);cursor:pointer;transition:transform .22s ease,box-shadow .22s}
+.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 40px rgba(10,10,10,0.12)}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-bottom:10px}
+.card .txt{font-size:15px;line-height:1.6;color:#111}
+
+/* small actions */
+.actions{display:flex;gap:8px;align-items:center;margin-top:10px;justify-content:space-between}
+.leftmeta{color:var(--muted);font-size:13px}
+.btn{padding:8px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.06);background:rgba(255,255,255,0.9);cursor:pointer;font-weight:700}
+.iconbtn{padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:white;cursor:pointer}
 
 /* reader modal */
-.reader-backdrop{display:none;position:fixed;inset:0;background:rgba(10,10,10,0.6);z-index:120;align-items:center;justify-content:center;padding:20px}
-.reader{background:linear-gradient(180deg,#fff,#fff7f1);max-width:900px;width:100%;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(10,10,10,0.4);animation:pop .28s}
-.reader img{width:100%;height:320px;object-fit:cover}
-.reader .content{padding:20px;max-height:60vh;overflow:auto}
-.reader .content h2{margin:0 0 10px 0;font-size:22px;color:#111}
-.reader .content p{font-size:18px;line-height:1.7;color:#222}
-.reader .foot{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid #f0e6e0;background:linear-gradient(90deg,rgba(255,255,255,0.95),rgba(255,255,255,0.95))}
-@keyframes pop{from{transform:translateY(8px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.reader-backdrop{display:none;position:fixed;inset:0;background:rgba(4,4,8,0.6);z-index:999;align-items:center;justify-content:center;padding:20px}
+.reader{background:linear-gradient(180deg,#fff,#fff8f2);max-width:940px;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(7,7,10,0.6);animation:pop .24s}
+.reader img{width:100%;height:420px;object-fit:cover;background:#000}
+.reader .content{padding:22px;max-height:62vh;overflow:auto}
+.reader h2{margin:0 0 8px 0;font-size:22px}
+.reader p{font-size:18px;line-height:1.8;color:#222;white-space:pre-wrap}
+.reader .foot{display:flex;justify-content:space-between;align-items:center;padding:14px;border-top:1px solid #f0e0d8}
 
-/* sidebar and responsive */
-.sidebar{position:sticky;top:24px;background:var(--card);padding:16px;border-radius:8px;border:1px solid var(--border)}
-.sidebar h4{margin:0 0 10px 0}
-.cat{padding:6px 10px;border-radius:999px;border:1px solid var(--border);background:white;cursor:pointer}
-.cat.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;border:none}
+/* dashboard */
+.sidebar{background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.5));padding:16px;border-radius:12px;border:1px solid var(--glass-border);backdrop-filter: blur(6px)}
+.table{width:100%;border-collapse:collapse;margin-top:10px}
+.table th,.table td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.05);font-size:13px}
+.table th{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;border:none}
 
-.footer{margin-top:22px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:40px}
-@media (max-width:920px){ .layout{grid-template-columns:1fr}.list-grid{grid-template-columns:1fr} .header{flex-direction:column;align-items:flex-start} .reader img{height:220px} }
-.small{padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:transparent;cursor:pointer}
-.input{padding:8px;border:1px solid #ddd;border-radius:8px;width:100%}
-.modal{display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:80}
-.modal .box{background:white;padding:16px;border-radius:8px;max-width:720px;width:100%}
+/* footer */
+.footer{margin-top:20px;text-align:center;color:var(--muted);font-size:13px;padding-bottom:40px}
+
+/* utilities */
+.hidden{display:none}
 </style>
 </head>
 <body>
+<div class="sunrise" aria-hidden></div>
 <div class="container">
   <header class="header">
-    <div class="brand">
-      <div class="logo" aria-hidden><svg width="36" height="36" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#fff"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="12" font-weight="700" fill="#ff6f2d">AK</text></svg></div>
-      <div><h1>🌅 AK Motivation</h1><p>Reader View + Image Upload — Final</p></div>
+    <div class="brand"><div class="logo">AK</div><div><h1 style="margin:0;font-size:18px">AK Motivation</h1><div style="color:var(--muted);font-size:13px">शायरी • विचार • प्रेरणा</div></div></div>
+    <div class="right">
+      <input id="search" class="search" placeholder="खोजें — प्रेरणा, शायरी..." />
+      <div id="ownerArea"></div>
     </div>
-    <nav class="nav">
-      <input id="search" class="input" placeholder="खोजें — प्रेरणा, शायरी..." style="min-width:240px" />
-      <div id="ownerControls" class="login-area"></div>
-    </nav>
   </header>
 
-  <main class="layout">
-    <section class="main">
-      <div class="section-title">
-        <div class="tabs" role="tablist">
-          <div class="tab" data-tab="quotes">विचार</div>
-          <div class="tab" data-tab="stories">कहानियाँ</div>
-          <div class="tab active" data-tab="shayari">Shayari Zone</div>
-          <div class="tab" data-tab="lines">पंक्तियाँ</div>
-          <div class="tab" data-tab="images">Images</div>
-        </div>
-        <div style="color:var(--muted)"><span id="count">0</span> items</div>
-      </div>
+  <div class="tabs" id="tabs">
+    <div class="tab" data-tab="quotes">विचार</div>
+    <div class="tab" data-tab="stories">कहानियाँ</div>
+    <div class="tab active" data-tab="shayari">Shayari Zone</div>
+    <div class="tab" data-tab="lines">पंक्तियाँ</div>
+    <div class="tab" data-tab="images">Images</div>
+    <div class="tab hidden" data-tab="dashboard" id="dashboardTab">Dashboard</div>
+  </div>
 
-      <div id="listArea">
-        <div id="list" class="list-grid" aria-live="polite"></div>
+  <div class="layout">
+    <main>
+      <div id="list" class="list" aria-live="polite"></div>
+      <div id="dashboardArea" class="hidden" style="margin-top:14px">
+        <div style="padding:12px;background:rgba(255,255,255,0.9);border-radius:12px;border:1px solid rgba(0,0,0,0.04)">
+          <h3 style="margin:0 0 8px 0">Owner Dashboard</h3>
+          <table class="table" id="dashTable"><thead><tr><th>Item</th><th>Likes</th><th>Shares</th><th>Views</th></tr></thead><tbody></tbody></table>
+          <div style="margin-top:8px"><button id="exportBtn" class="btn">Export JSON</button></div>
+        </div>
       </div>
-    </section>
+    </main>
 
     <aside class="sidebar">
-      <h4>Daily Inspiration</h4>
-      <div id="daily">"हर सुबह एक नया मौका है।"</div>
-      <hr style="margin:12px 0;border:none;border-top:1px solid var(--border)" />
-      <h4>Shayari Categories</h4>
-      <div id="categoryTabs" class="category-tabs"></div>
-      <div style="margin-top:10px">
-        <button id="addCategoryBtn" class="small" style="display:none">+ नई Category जोड़ें</button>
-      </div>
-      <hr style="margin:12px 0;border:none;border-top:1px solid var(--border)" />
-      <h4>Tags</h4>
-      <div id="tagCloud" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
+      <h4 style="margin:0 0 8px 0">Shayari Categories</h4>
+      <div id="categoryTabs" style="display:flex;flex-direction:column;gap:8px"></div>
       <div style="margin-top:12px">
-        <button id="addBtn" class="btn primary" style="display:none">+ जोड़ें</button>
+        <button id="addBtn" class="btn hidden">+ Add</button>
+        <button id="addCatBtn" class="btn hidden" style="margin-left:8px">+ Category</button>
       </div>
-      <div style="margin-top:12px;color:var(--muted);font-size:12px">Owner-only: Add/Edit/Delete/Add Category/Image Upload</div>
+      <div style="margin-top:14px;color:var(--muted);font-size:13px">Owner-only: Add / Edit / Delete / Dashboard</div>
     </aside>
-  </main>
+  </div>
 
-  <div class="footer">AK Motivation • Reader modal • Offline • Owner-secured</div>
+  <div class="footer">AK Motivation • v4 — Inspiring look</div>
 </div>
 
 <!-- Add/Edit Modal -->
-<div id="modal" class="modal"><div class="box">
-  <h3 id="modalTitle">नया जोड़ें</h3>
-  <form id="form">
-    <div style="margin-top:8px"><label>Type</label><br>
-      <select id="typeSel" class="input"><option value="quotes">विचार</option><option value="stories">कहानी</option><option value="shayari">शायरी (Category)</option><option value="lines">पंक्ति</option><option value="images">Image Only</option></select>
-    </div>
-    <div id="catSelectRow" style="margin-top:8px;display:none">
-      <label>Shayari Category</label><br>
-      <select id="shayariCatSelect" class="input"></select>
-    </div>
-    <div id="titleRow" style="margin-top:8px;display:none">
-      <label>शीर्षक</label><br>
-      <input id="title" class="input" />
-    </div>
-    <div id="textRow" style="margin-top:8px">
-      <label>Text (अगर image-only है तो खाली छोड़ दें)</label><br>
-      <textarea id="text" class="input" rows="6"></textarea>
-    </div>
-    <div style="margin-top:8px">
-      <label>Author (optional)</label><br>
-      <input id="author" class="input" />
-    </div>
-    <div style="margin-top:8px">
-      <label>Tags (comma)</label><br>
-      <input id="tags" class="input" placeholder="उदा. प्रेरणा, प्यार" />
-    </div>
-    <div style="margin-top:8px">
-      <label>Upload Image (optional)</label><br>
-      <input id="imageInput" type="file" accept="image/*" />
-      <div style="font-size:12px;color:var(--muted);margin-top:6px">Image will be saved in browser (base64). For Image-only entries, leave Text empty.</div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
-      <button type="button" id="cancel" class="small">रद्द करें</button>
-      <button type="submit" class="btn primary">सहेजें</button>
-    </div>
-  </form>
-</div></div>
-
-<!-- Category modal -->
-<div id="catModal" class="modal"><div class="box">
-  <h3>नई Category जोड़ें</h3>
-  <div style="margin-top:8px"><input id="newCatName" class="input" placeholder="उदा. Couple Shayari" /></div>
-  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
-    <button id="cancelCat" class="small">रद्द करें</button>
-    <button id="saveCat" class="btn primary">Add Category</button>
-  </div>
+<div id="modal" class="reader-backdrop"><div class="reader"><div style="padding:14px"><h3 id="modalTitle">Add</h3>
+  <form id="form"><div style="display:flex;gap:8px;flex-direction:column">
+  <select id="typeSel" style="padding:8px;border-radius:8px"><option value="shayari">Shayari</option><option value="quotes">Quotes</option><option value="stories">Stories</option><option value="lines">Lines</option><option value="images">Image Only</option></select>
+  <input id="title" placeholder="Title (optional)" style="padding:8px;border-radius:8px"/>
+  <textarea id="text" rows="6" placeholder="Text (leave empty for image-only)" style="padding:8px;border-radius:8px"></textarea>
+  <input id="author" placeholder="Author (optional)" style="padding:8px;border-radius:8px"/>
+  <input id="tags" placeholder="Tags, comma" style="padding:8px;border-radius:8px"/>
+  <input id="imageInput" type="file" accept="image/*"/>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
+    <button type="button" id="cancelBtn" class="btn">Cancel</button>
+    <button type="submit" class="btn">Save</button>
+  </div></div></form>
 </div></div>
 
 <!-- Reader Modal -->
@@ -175,397 +135,129 @@
   </div>
   <div class="foot">
     <div id="readerMeta" style="color:var(--muted)"></div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button id="readerLike" class="small">Like</button>
-      <button id="readerCopy" class="small">Copy</button>
-      <button id="readerShare" class="small">Share</button>
-      <button id="readerEdit" class="small" style="display:none">Edit</button>
-      <button id="readerClose" class="small">Close</button>
+    <div style="display:flex;gap:8px">
+      <button id="readerLike" class="iconbtn">❤ Like</button>
+      <button id="readerCopy" class="iconbtn">📋 Copy</button>
+      <button id="readerShare" class="iconbtn">🔗 Share</button>
+      <button id="readerEdit" class="iconbtn hidden">Edit</button>
+      <button id="readerClose" class="iconbtn">Close</button>
     </div>
   </div>
 </div></div>
 
-<div id="toast" class="toast">Copied to clipboard</div>
+<div id="toast" style="position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:#111;color:#fff;padding:8px 12px;border-radius:10px;opacity:0;transition:opacity .2s;z-index:1200">Copied</div>
 
 <script>
-// Owner credentials (local)
-const OWNER_USER = 'akimran';
-const OWNER_PASS = '143143';
-const AUTO_LOGOUT_MS = 3 * 60 * 1000; // 3 minutes inactivity
-const STORAGE = 'ak_reader_image_v1';
-
+const OWNER='akimran', PASS='143143', STORAGE='ak_v4_v1';
 const defaultData = {
-  quotes:[{id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— ए. पी. जे. अब्दुल कलाम',tags:['सपने','प्रेरणा'],likes:12,lineLikes:{0:2}}],
-  stories:[{id:1,title:'छोटा कदम, बड़ी जीत',content:'एक छोटे से गाँव का लड़का रोज़ पढ़ता रहा और सफलता पायी।',tags:['प्रेरणा'],likes:4,lineLikes:{0:1}}],
-  lines:[{id:1,text:'हार मत मानो — आज की मेहनत कल का फल है।',tags:['हिम्मत'],likes:2,lineLikes:{0:0}}],
-  shayari: {
-    "Couple Shayari":[{id:1,text:'तुम्हारे बिना अधूरी सी मेरी हर सुबह',author:'— अनजान',tags:['प्यार'],likes:3,lineLikes:{0:1}}],
-    "Attitude Shayari":[{id:1,text:'मैं अपनी राह खुद बनाता हूँ — तुझे देख कर नहीं बदलता।',author:'—',tags:['अटिट्यूड'],likes:1,lineLikes:{0:0}}],
-    "Friendship Shayari":[{id:1,text:'दोस्ती वो नहीं जो साथ में हँसाती है, दोस्ती तो वो होती है जो आँसू पोंछ लेती है।',author:'—',tags:['दोस्ती'],likes:2,lineLikes:{0:0}}],
-    "Rishte Shayari":[{id:1,text:'रिश्तों की कदर करो — यही जीवन का असली धन है।',author:'—',tags:['रिश्ता'],likes:2,lineLikes:{0:0}}]
-  },
-  images: [ {id:1,image:null, tags:['motivational']} ],
-  categories:["Couple Shayari","Attitude Shayari","Friendship Shayari","Rishte Shayari"],
-  settings:{daily:{type:'quotes',id:1}}
+  quotes:[{id:1,text:'सपने वो नहीं जो आप सोते वक्त देखते हैं — सपने वो हैं जो आपको सोने नहीं देते।',author:'— ए. पी. जे. अब्दुल कलाम',likes:12,shares:2,views:10,image:null}],
+  stories:[],
+  lines:[],
+  shayari:{"Couple Shayari":[{id:11,text:'तुम्हारे बिना अधूरी सी मेरी हर सुबह',author:'— अनजान',likes:3,shares:0,views:5,image:null}]},
+  images:[],
+  categories:["Couple Shayari"]
 };
+let db = load(), active='shayari', owner=false, current=null, editing=null;
 
-let db = load();
-let active = 'shayari'; // default tab
-let shayariActiveCategory = db.categories && db.categories[0] ? db.categories[0] : 'Couple Shayari';
-let owner = false;
-let lastActivity = Date.now();
-let editing = null;
-
-// DOM refs
-const list = document.getElementById('list');
-const tabs = document.querySelectorAll('.tab');
-const search = document.getElementById('search');
-const addBtn = document.getElementById('addBtn');
-const modal = document.getElementById('modal');
-const form = document.getElementById('form');
-const typeSel = document.getElementById('typeSel');
-const catSelectRow = document.getElementById('catSelectRow');
-const shayariCatSelect = document.getElementById('shayariCatSelect');
-const titleRow = document.getElementById('titleRow');
-const titleI = document.getElementById('title');
-const textI = document.getElementById('text');
-const authorI = document.getElementById('author');
-const tagsI = document.getElementById('tags');
-const cancel = document.getElementById('cancel');
-const countEl = document.getElementById('count');
-const tagCloud = document.getElementById('tagCloud');
-const daily = document.getElementById('daily');
-const ownerControls = document.getElementById('ownerControls');
-const toast = document.getElementById('toast');
-const categoryTabs = document.getElementById('categoryTabs');
-const addCategoryBtn = document.getElementById('addCategoryBtn');
-const catModal = document.getElementById('catModal');
-const newCatName = document.getElementById('newCatName');
-const cancelCat = document.getElementById('cancelCat');
-const saveCat = document.getElementById('saveCat');
-const imageInput = document.getElementById('imageInput');
-
-// reader modal refs
-const readerBackdrop = document.getElementById('readerBackdrop');
-const readerImageWrap = document.getElementById('readerImageWrap');
-const readerTitle = document.getElementById('readerTitle');
-const readerText = document.getElementById('readerText');
-const readerMeta = document.getElementById('readerMeta');
-const readerLike = document.getElementById('readerLike');
-const readerCopy = document.getElementById('readerCopy');
-const readerShare = document.getElementById('readerShare');
-const readerEdit = document.getElementById('readerEdit');
-const readerClose = document.getElementById('readerClose');
-
-init();
-
-function load(){
-  try{
-    const raw = localStorage.getItem(STORAGE);
-    if(raw) return JSON.parse(raw);
-  }catch(e){}
-  localStorage.setItem(STORAGE, JSON.stringify(defaultData));
-  return JSON.parse(JSON.stringify(defaultData));
-}
+function load(){ try{ const s=localStorage.getItem(STORAGE); if(s) return JSON.parse(s);}catch(e){} localStorage.setItem(STORAGE, JSON.stringify(defaultData)); return JSON.parse(JSON.stringify(defaultData)); }
 function save(){ localStorage.setItem(STORAGE, JSON.stringify(db)); }
 
-function init(){
-  attach();
-  checkOwnerSessionOnLoad();
-  rebuildAllCategoriesUI();
-  rebuildTags();
-  render();
-  renderDaily();
-  startInactivityWatcher();
-  generateUrlFromQuery();
+function $(q){ return document.querySelector(q) }
+function qs(q){ return document.querySelectorAll(q) }
+
+// init
+renderTabs();
+renderCats();
+renderList();
+setupOwnerArea();
+attachUI();
+
+function renderTabs(){ qs('.tab').forEach(t=> t.addEventListener('click', (e)=>{ qs('.tab').forEach(x=>x.classList.remove('active')); e.target.classList.add('active'); active=e.target.dataset.tab; renderList(); })) }
+
+function renderCats(){
+  const wrap = $('#categoryTabs'); wrap.innerHTML='';
+  (db.categories||[]).forEach(c=>{ const b=document.createElement('button'); b.textContent=c; b.className='btn'; b.style.display='block'; b.style.marginBottom='8px'; b.addEventListener('click', ()=>{ active='shayari'; renderList(c); }); wrap.appendChild(b); });
 }
 
-function attach(){
-  tabs.forEach(t=>t.addEventListener('click', ()=>{ tabs.forEach(x=>x.classList.remove('active')); t.classList.add('active'); active = t.dataset.tab; render(); }));
-  search.addEventListener('input', debounce(render,250));
-  addBtn.addEventListener('click', ()=> openAddModal());
-  cancel.addEventListener('click', ()=> closeModal());
-  form.addEventListener('submit', onSave);
-  addCategoryBtn.addEventListener('click', ()=> { if(isOwner()){ catModal.style.display='flex'; } else showLoginPrompt(); });
-  cancelCat.addEventListener('click', ()=> { catModal.style.display='none'; newCatName.value=''; });
-  saveCat.addEventListener('click', saveNewCategory);
-  document.addEventListener('mousemove', updateLastActivity);
-  document.addEventListener('keydown', updateLastActivity);
-  document.addEventListener('click', updateLastActivity);
-  imageInput.addEventListener('change', handleImageSelect);
-  readerClose.addEventListener('click', closeReader);
-  readerBackdrop.addEventListener('click', (e)=>{ if(e.target===readerBackdrop) closeReader(); });
-  readerLike.addEventListener('click', ()=>{ if(currentReaderItem){ currentReaderItem.likes = (currentReaderItem.likes||0)+1; save(); render(); updateReaderMeta(); } });
-  readerCopy.addEventListener('click', ()=>{ if(currentReaderItem){ const txt = readerText.innerText || ''; copyToClipboard(txt); showToast('Copied'); } });
-  readerShare.addEventListener('click', ()=>{ if(currentReaderItem){ const url = generateItemUrl(currentReaderType, currentReaderItem.id, currentReaderType==='shayari'? currentReaderCat : null); if(navigator.share){ navigator.share({title:'AK Motivation', text: readerText.innerText + '\\n\\n' + url}).catch(()=>{}); } else { copyToClipboard(url); showToast('Link copied'); } } });
-  readerEdit.addEventListener('click', ()=>{ if(currentReaderItem){ closeReader(); // open edit modal for current item
-    active = currentReaderType; if(currentReaderType==='shayari') shayariActiveCategory = currentReaderCat; openEdit(currentReaderItem); } });
-  renderOwnerControls();
-}
-
-function renderOwnerControls(){
-  ownerControls.innerHTML = '';
-  if(isOwner()){
-    const span = document.createElement('span'); span.textContent = 'Owner: ' + OWNER_USER;
-    const logout = document.createElement('button'); logout.className='btn ghost'; logout.textContent='Logout'; logout.addEventListener('click', ()=> doLogout());
-    ownerControls.appendChild(span);
-    ownerControls.appendChild(logout);
-    addBtn.style.display = 'inline-block';
-    addCategoryBtn.style.display = 'inline-block';
-  } else {
-    const loginBtn = document.createElement('button'); loginBtn.className='btn primary'; loginBtn.textContent='Owner Login'; loginBtn.addEventListener('click', showLoginPrompt);
-    ownerControls.appendChild(loginBtn);
-    addBtn.style.display = 'none';
-    addCategoryBtn.style.display = 'none';
-  }
-}
-
-function showLoginPrompt(){
-  const u = prompt('Owner Username:');
-  if(u === null) return;
-  const p = prompt('Password:');
-  if(p === null) return;
-  if(u === OWNER_USER && p === OWNER_PASS){
-    doLoginProgrammatic();
-    alert('Login सफल — owner mode on');
-  } else alert('Invalid credentials');
-}
-
-function doLoginProgrammatic(){ owner = true; sessionStorage.setItem('ak_owner_active','1'); updateLastActivity(); renderOwnerControls(); render(); }
-function doLogout(){ owner = false; sessionStorage.removeItem('ak_owner_active'); renderOwnerControls(); render(); alert('Logged out'); }
-function checkOwnerSessionOnLoad(){ const s = sessionStorage.getItem('ak_owner_active'); if(s){ owner = true; updateLastActivity(); } renderOwnerControls(); }
-function isOwner(){ return owner === true; }
-function startInactivityWatcher(){ setInterval(()=>{ if(!isOwner()) return; if(Date.now() - lastActivity > AUTO_LOGOUT_MS){ doLogout(); alert('Auto-logout due to inactivity (3 minutes).'); } }, 1000); }
-function updateLastActivity(){ lastActivity = Date.now(); }
-
-function rebuildAllCategoriesUI(){
-  categoryTabs.innerHTML='';
-  (db.categories||[]).forEach(cat => {
-    const b = document.createElement('button'); b.className='cat' + (cat===shayariActiveCategory ? ' active' : ''); b.textContent = cat;
-    b.addEventListener('click', ()=>{ shayariActiveCategory = cat; document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active')); b.classList.add('active'); render(); });
-    categoryTabs.appendChild(b);
-  });
-  shayariCatSelect.innerHTML='';
-  (db.categories||[]).forEach(cat => { const o = document.createElement('option'); o.value = cat; o.textContent = cat; shayariCatSelect.appendChild(o); });
-}
-
-function saveNewCategory(){ const name = (newCatName.value||'').trim(); if(!name){ alert('Category name लिखें'); return; } if(!db.categories) db.categories=[]; if(db.categories.includes(name)){ alert('Category पहले से मौजूद है'); return; } db.categories.push(name); db.shayari[name] = []; save(); rebuildAllCategoriesUI(); catModal.style.display='none'; newCatName.value=''; alert('Category added'); }
-
-function handleImageSelect(e){ const f = e.target.files[0]; if(!f) return; const reader = new FileReader(); reader.onload = function(ev){ imageInput.dataset.base64 = ev.target.result; showToast('Image selected (will be saved on Save)'); }; reader.readAsDataURL(f); }
-
-function openAddModal(){ editing = null; document.getElementById('modalTitle').textContent='नया जोड़ें'; form.reset(); typeSel.value = active==='shayari' ? 'shayari' : active; onTypeChange(); modal.style.display='flex'; imageInput.value=''; imageInput.dataset.base64=''; }
-
-function closeModal(){ modal.style.display='none'; form.reset(); editing = null; imageInput.dataset.base64=''; }
-
-typeSel.addEventListener('change', onTypeChange);
-function onTypeChange(){ const t = typeSel.value; titleRow.style.display = t==='stories' ? 'block' : 'none'; catSelectRow.style.display = t==='shayari' ? 'block' : 'none'; if(t==='images'){ textRow.style.display='none'; } else { textRow.style.display='block'; } }
-
-function render(){
-  const q = (search.value||'').toLowerCase().trim();
-  let arr = [];
-  if(active === 'quotes') arr = db.quotes || [];
-  else if(active === 'stories') arr = db.stories || [];
-  else if(active === 'lines') arr = db.lines || [];
-  else if(active === 'shayari') arr = db.shayari[shayariActiveCategory] || [];
-  else if(active === 'images') arr = db.images || [];
-  arr = arr.filter(it => {
-    const txt = ((it.title||'')+' '+(it.text||it.content||'')+' '+(it.author||'')).toLowerCase();
-    return q ? txt.includes(q) : true;
-  });
-  list.innerHTML='';
-  countEl.textContent = arr.length;
-  if(arr.length === 0){ list.innerHTML = '<div style="color:#777">कोई आइटम नहीं मिला।</div>'; return; }
-  arr.forEach(it => {
-    const card = document.createElement('article'); card.className='card';
-    // clicking card opens reader modal
-    card.addEventListener('click', ()=> openReaderFor(it));
-    // image
-    if(it.image){ const img = document.createElement('img'); img.src = it.image; card.appendChild(img); }
-    // if image-only and no text, show only image
-    if(active==='images' || (!it.text && !it.content && it.image)){
-      // nothing else
-    } else if(active==='stories'){
-      card.innerHTML += `<h3 style="margin:6px 0 4px 0">${escape(it.title||'Untitled')}</h3>`;
-      const p = document.createElement('p'); p.textContent = it.content || it.text || ''; card.appendChild(p);
-    } else {
-      const p = document.createElement('p'); p.textContent = it.text || it.content || ''; card.appendChild(p);
-      if(it.author){ const a = document.createElement('div'); a.style.color='var(--muted)'; a.textContent = it.author; card.appendChild(a); }
-    }
-    // meta area (shows small like count)
-    const meta = document.createElement('div'); meta.className='meta';
-    const left = document.createElement('div'); left.textContent = '';
-    const actions = document.createElement('div'); actions.className='actions';
-    if(active!=='images'){
-      const likeTotal = document.createElement('button'); likeTotal.className='small'; likeTotal.textContent = `Like ${it.likes||0}`; likeTotal.addEventListener('click',(e)=>{ e.stopPropagation(); it.likes=(it.likes||0)+1; save(); render(); });
-      actions.appendChild(likeTotal);
-    } else {
-      const likeTotal = document.createElement('button'); likeTotal.className='small'; likeTotal.textContent = `Like ${it.likes||0}`; likeTotal.addEventListener('click',(e)=>{ e.stopPropagation(); it.likes=(it.likes||0)+1; save(); render(); });
-      const copyBtn = document.createElement('button'); copyBtn.className='small copy-link'; copyBtn.textContent='Copy Link'; copyBtn.addEventListener('click',(e)=>{ e.stopPropagation(); const url = generateItemUrl('images', it.id); copyToClipboard(url); showToast('Link copied'); });
-      actions.appendChild(likeTotal); actions.appendChild(copyBtn);
-    }
-    if(isOwner()){
-      const edit = document.createElement('button'); edit.className='btn ghost'; edit.textContent='Edit'; edit.addEventListener('click',(e)=>{ e.stopPropagation(); openEdit(it); });
-      const del = document.createElement('button'); del.className='btn ghost'; del.textContent='Delete'; del.addEventListener('click',(e)=>{ e.stopPropagation(); if(confirm('हटाएं?')){ removeItem(it.id); save(); rebuildAllCategoriesUI(); render(); rebuildTags(); } });
-      actions.appendChild(edit); actions.appendChild(del);
-    }
-    meta.appendChild(left); meta.appendChild(actions);
-    card.appendChild(meta);
+function renderList(cat){
+  const list = $('#list'); list.innerHTML='';
+  let items=[];
+  if(active==='quotes') items = db.quotes || [];
+  else if(active==='stories') items = db.stories || [];
+  else if(active==='lines') items = db.lines || [];
+  else if(active==='shayari') items = (cat ? db.shayari[cat]||[] : db.shayari[db.categories[0]]||[]) ;
+  else if(active==='images') items = db.images || [];
+  items.forEach(it=>{ const card=document.createElement('div'); card.className='card'; if(it.image){ const img=document.createElement('img'); img.src=it.image; card.appendChild(img); } if(it.text||it.content){ const p=document.createElement('div'); p.className='txt'; p.textContent = it.title ? (it.title + '\\n' + (it.content||it.text||'')) : (it.text||it.content||''); card.appendChild(p); } const meta=document.createElement('div'); meta.className='actions'; const left=document.createElement('div'); left.className='leftmeta'; left.textContent=''; const right=document.createElement('div'); right.style.display='flex'; right.style.gap='8px'; // like/share/copy buttons (card-level)
+    const like=document.createElement('button'); like.className='iconbtn'; like.textContent='❤ '+(it.likes||0); like.addEventListener('click',(e)=>{ e.stopPropagation(); it.likes=(it.likes||0)+1; save(); showToast('Liked'); renderList(); });
+    const share=document.createElement('button'); share.className='iconbtn'; share.textContent='🔗'; share.title='Share'; share.addEventListener('click',(e)=>{ e.stopPropagation(); it.shares=(it.shares||0)+1; save(); copy(generateUrl(active,it.id)); showToast('Link copied'); });
+    const copyBtn=document.createElement('button'); copyBtn.className='iconbtn'; copyBtn.textContent='📋'; copyBtn.title='Copy Link'; copyBtn.addEventListener('click',(e)=>{ e.stopPropagation(); copy(generateUrl(active,it.id)); showToast('Link copied'); });
+    right.appendChild(like); right.appendChild(share); right.appendChild(copyBtn);
+    meta.appendChild(left); meta.appendChild(right); card.appendChild(meta);
+    card.addEventListener('click', ()=> openReader(it));
     list.appendChild(card);
   });
-  // update category active class
-  document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
-  const activeBtn = Array.from(document.querySelectorAll('.cat')).find(b => b.textContent===shayariActiveCategory);
-  if(activeBtn) activeBtn.classList.add('active');
+  $('#dashTable tbody').innerHTML='';
+  if(owner) buildDashboard();
 }
 
-let currentReaderItem = null;
-let currentReaderType = null;
-let currentReaderCat = null;
+function generateUrl(t,id){ const u=new URL(location.href); u.searchParams.set('t',t); u.searchParams.set('id',id); return u.toString(); }
 
-function openReaderFor(it){
-  currentReaderItem = it;
-  // determine type and cat by searching collections
-  currentReaderType = detectTypeOf(it);
-  currentReaderCat = currentReaderType==='shayari' ? shayariActiveCategory : null;
-  // populate modal
-  readerImageWrap.innerHTML = '';
-  if(it.image){ const img = document.createElement('img'); img.src = it.image; readerImageWrap.appendChild(img); }
-  readerTitle.textContent = it.title || '';
-  // if long content, show full text; join for stories/quotes/shayari
-  const text = (it.content || it.text || '') + (it.author ? '\n\n' + it.author : '');
-  readerText.textContent = text;
-  updateReaderMeta();
-  readerEdit.style.display = isOwner() ? 'inline-block' : 'none';
-  // show modal and update URL
-  readerBackdrop.style.display = 'flex';
-  // push URL state
-  const url = generateItemUrl(currentReaderType, it.id, currentReaderType==='shayari'? currentReaderCat : null);
-  history.pushState({view:true}, '', url);
+function openReader(it){
+  it.views = (it.views||0)+1; save(); current=it;
+  $('#readerImageWrap').innerHTML=''; if(it.image){ const img=document.createElement('img'); img.src=it.image; $('#readerImageWrap').appendChild(img); }
+  $('#readerTitle').textContent = it.title||''; $('#readerText').textContent = it.text||it.content||'';
+  $('#readerMeta').textContent = `Likes: ${it.likes||0} • Shares: ${it.shares||0} • Views: ${it.views||0}`;
+  $('#readerEdit').classList.toggle('hidden', !owner);
+  $('#readerBackdrop').style.display='flex';
+  history.pushState({},'', generateUrl(active,it.id));
 }
 
-function updateReaderMeta(){ if(!currentReaderItem) return; readerMeta.textContent = `Likes: ${currentReaderItem.likes||0}`; }
+$('#readerClose').addEventListener('click', ()=>{ $('#readerBackdrop').style.display='none'; history.pushState({},'', location.pathname); });
 
-function closeReader(){
-  readerBackdrop.style.display = 'none';
-  currentReaderItem = null;
-  currentReaderType = null;
-  currentReaderCat = null;
-  // restore URL to base (remove query)
-  history.pushState({}, '', location.pathname);
-}
+$('#readerLike').addEventListener('click', ()=>{ if(current){ current.likes=(current.likes||0)+1; save(); $('#readerMeta').textContent = `Likes: ${current.likes} • Shares: ${current.shares||0} • Views: ${current.views||0}`; renderList(); showToast('Liked'); } });
+$('#readerCopy').addEventListener('click', ()=>{ if(current){ copy(current.text||current.content||''); showToast('Copied'); } });
+$('#readerShare').addEventListener('click', ()=>{ if(current){ current.shares=(current.shares||0)+1; save(); const url=generateUrl(active,current.id); copy(url); showToast('Link copied'); $('#readerMeta').textContent = `Likes: ${current.likes||0} • Shares: ${current.shares||0} • Views: ${current.views||0}`; renderList(); } });
 
-function detectTypeOf(it){
-  // find by id in collections
-  if((db.quotes||[]).some(x=>x.id===it.id)) return 'quotes';
-  if((db.stories||[]).some(x=>x.id===it.id)) return 'stories';
-  if((db.lines||[]).some(x=>x.id===it.id)) return 'lines';
-  for(const cat of (db.categories||[])){
-    if((db.shayari[cat]||[]).some(x=>x.id===it.id)){ shayariActiveCategory = cat; return 'shayari'; }
-  }
-  if((db.images||[]).some(x=>x.id===it.id)) return 'images';
-  return 'quotes';
-}
+// add/edit modal logic (owner-only)
+$('#addBtn').addEventListener('click', ()=>{ editing=null; $('#modal').style.display='flex'; $('#modalTitle').textContent='Add Item'; });
+$('#cancelBtn').addEventListener('click', ()=>{ $('#modal').style.display='none'; });
+$('#form').addEventListener('submit', (e)=>{ e.preventDefault(); const type=$('#typeSel').value; const title=$('#title').value.trim(); const text=$('#text').value.trim(); const author=$('#author').value.trim(); const tags=$('#tags').value.split(',').map(s=>s.trim()).filter(Boolean); const img = $('#imageInput').dataset.base64 || null;
+  const obj={id:Date.now(),likes:0,shares:0,views:0,tags:tags,image:img};
+  if(type==='stories'){ obj.title=title; obj.content=text; db.stories.unshift(obj); }
+  else if(type==='quotes'){ obj.text=text; obj.author=author; db.quotes.unshift(obj); }
+  else if(type==='lines'){ obj.text=text; db.lines.unshift(obj); }
+  else if(type==='shayari'){ obj.text=text; obj.author=author; const cat=db.categories[0]; if(!db.shayari[cat]) db.shayari[cat]=[]; db.shayari[cat].unshift(obj); }
+  else if(type==='images'){ obj.text=text||''; if(!db.images) db.images=[]; db.images.unshift(obj); }
+  save(); $('#modal').style.display='none'; $('#imageInput').value=''; $('#imageInput').dataset.base64=''; renderList(); renderCats(); showToast('Saved'); });
 
-function removeItem(id){
-  if(active==='quotes') db.quotes = (db.quotes||[]).filter(x=>x.id!==id);
-  else if(active==='stories') db.stories = (db.stories||[]).filter(x=>x.id!==id);
-  else if(active==='lines') db.lines = (db.lines||[]).filter(x=>x.id!==id);
-  else if(active==='shayari') db.shayari[shayariActiveCategory] = (db.shayari[shayariActiveCategory]||[]).filter(x=>x.id!==id);
-  else if(active==='images') db.images = (db.images||[]).filter(x=>x.id!==id);
-}
+// image input to base64
+$('#imageInput').addEventListener('change', (e)=>{ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=(ev)=>{ $('#imageInput').dataset.base64 = ev.target.result; showToast('Image selected'); }; r.readAsDataURL(f); });
 
-function openEdit(it){
-  editing = it;
-  document.getElementById('modalTitle').textContent='संपादित करें';
-  typeSel.value = active==='shayari' ? 'shayari' : active;
-  onTypeChange();
-  if(active==='stories'){ titleI.value = it.title; textI.value = it.content; }
-  else if(active==='quotes'){ textI.value = it.text; authorI.value = it.author; }
-  else if(active==='shayari'){ textI.value = it.text; authorI.value = it.author; shayariCatSelect.value = shayariActiveCategory; }
-  else if(active==='images'){ /* nothing */ }
-  if(it.image) imageInput.dataset.base64 = it.image;
-  modal.style.display='flex';
-}
+// owner area & dashboard
+function setupOwnerArea(){
+  const a = $('#ownerArea'); a.innerHTML=''; if(owner){ const span=document.createElement('div'); span.textContent='Owner: '+OWNER; span.style.marginRight='8px'; const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Logout'; btn.addEventListener('click', ()=>{ owner=false; save(); setupOwnerArea(); renderList(); }); a.appendChild(span); a.appendChild(btn); $('#addBtn').classList.remove('hidden'); $('#addCatBtn').classList.remove('hidden'); $('#dashboardTab').classList.remove('hidden'); } else { const btn=document.createElement('button'); btn.className='btn'; btn.textContent='Owner Login'; btn.addEventListener('click', ()=>{ const u=prompt('Username'); if(u===OWNER){ const p=prompt('Password'); if(p===PASS){ owner=true; setupOwnerArea(); renderList(); buildDashboard(); alert('Owner mode on'); } else alert('Wrong password'); } else alert('Wrong user'); }); a.appendChild(btn); } }
 
-function onSave(e){
-  e.preventDefault();
-  if(!isOwner()){ alert('Only owner can add/edit'); modal.style.display='none'; return; }
-  const t = typeSel.value;
-  const tags = (tagsI.value||'').split(',').map(s=>s.trim()).filter(Boolean);
-  const imageBase = imageInput.dataset.base64 || null;
-  if(editing){
-    if(t==='stories'){ editing.title = titleI.value; editing.content = textI.value; editing.tags = tags; if(imageBase) editing.image = imageBase; }
-    else if(t==='quotes'){ editing.text = textI.value; editing.author = authorI.value; editing.tags = tags; if(imageBase) editing.image = imageBase; }
-    else if(t==='lines'){ editing.text = textI.value; editing.tags = tags; if(imageBase) editing.image = imageBase; }
-    else if(t==='shayari'){ editing.text = textI.value; editing.author = authorI.value; editing.tags = tags; const targetCat = shayariCatSelect.value; removeItem(editing.id); if(!db.shayari[targetCat]) db.shayari[targetCat]=[]; if(imageBase) editing.image = imageBase; db.shayari[targetCat].unshift(editing); }
-    else if(t==='images'){ if(imageBase) editing.image = imageBase; }
-    editing = null;
-  } else {
-    const obj = { id: Date.now(), likes:0, tags, lineLikes:{} };
-    if(imageBase) obj.image = imageBase;
-    if(t==='stories'){ obj.title = titleI.value; obj.content = textI.value; db.stories.unshift(obj); }
-    else if(t==='quotes'){ obj.text = textI.value; obj.author = authorI.value; db.quotes.unshift(obj); }
-    else if(t==='lines'){ obj.text = textI.value; db.lines.unshift(obj); }
-    else if(t==='shayari'){ obj.text = textI.value; obj.author = authorI.value; const cat = shayariCatSelect.value || shayariActiveCategory; if(!db.shayari[cat]) db.shayari[cat]=[]; db.shayari[cat].unshift(obj); }
-    else if(t==='images'){ // image-only entry; text can be empty
-      obj.text = textI.value || '';
-      if(!db.images) db.images = [];
-      db.images.unshift(obj);
-    }
-  }
-  save();
-  form.reset();
-  modal.style.display='none';
-  imageInput.dataset.base64 = '';
-  rebuildAllCategoriesUI();
-  rebuildTags();
-  render();
-  renderDaily();
-}
+function buildDashboard(){ if(!owner) return; const tbody = $('#dashTable tbody'); tbody.innerHTML=''; const rows=[]; (db.quotes||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); (db.stories||[]).forEach(it=> rows.push({title:(it.title||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0})); Object.keys(db.shayari||{}).forEach(cat=> (db.shayari[cat]||[]).forEach(it=> rows.push({title:(it.text||'').slice(0,60),likes:it.likes||0,shares:it.shares||0,views:it.views||0}))); (db.images||[]).forEach(it=> rows.push({title:'Image',likes:it.likes||0,shares:it.shares||0,views:it.views||0})); rows.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${escapeHtml(r.title)}</td><td>${r.likes}</td><td>${r.shares}</td><td>${r.views}</td>`; tbody.appendChild(tr); }); $('#exportBtn').addEventListener('click', ()=>{ const a=document.createElement('a'); const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); a.href=URL.createObjectURL(blob); a.download='ak_backup_v4.json'; a.click(); }); $('#dashboardArea').classList.remove('hidden'); }
 
-function generateItemUrl(type, id, cat){
-  const base = location.origin + location.pathname;
-  const params = new URLSearchParams();
-  params.set('t', type);
-  params.set('id', id);
-  if(cat) params.set('cat', cat);
-  return `${base}?${params.toString()}`;
-}
+// utilities
+function copy(t){ try{ navigator.clipboard.writeText(t); }catch(e){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } }
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.opacity=1; setTimeout(()=> t.style.opacity=0,1600); }
+function escapeHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function copyToClipboard(text){ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).catch(()=> fallbackCopy(text)); } else fallbackCopy(text); }
-function fallbackCopy(text){ const ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); }
-function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=> toast.classList.remove('show'), 2000); }
+// initial behaviors: check query params to open reader if present
+(function(){ const params=new URLSearchParams(location.search); const t=params.get('t'); const id=params.get('id'); if(t && id){ // search item
+    let found=null;
+    if(t==='quotes') found=(db.quotes||[]).find(x=>String(x.id)===String(id));
+    if(t==='stories') found=(db.stories||[]).find(x=>String(x.id)===String(id));
+    if(t==='lines') found=(db.lines||[]).find(x=>String(x.id)===String(id));
+    if(t==='shayari'){ for(const c of db.categories||[]){ const f=(db.shayari[c]||[]).find(x=>String(x.id)===String(id)); if(f){ found=f; break; } } }
+    if(t==='images') found=(db.images||[]).find(x=>String(x.id)===String(id));
+    if(found) setTimeout(()=> openReader(found), 400);
+  } })();
 
-function renderDaily(){ const d = db.settings && db.settings.daily; if(!d){ daily.textContent=''; return; } const col = db[d.type]||[]; const it = col.find(x=>x.id===d.id); daily.textContent = it ? (d.type==='stories' ? it.title : (it.text||it.content)) : ''; }
-
-function rebuildTags(){ const s = new Set(); ['stories','quotes','lines'].forEach(k=> (db[k]||[]).forEach(i=> (i.tags||[]).forEach(t=> s.add(t)))); Object.values(db.shayari||{}).forEach(arr => arr.forEach(i=> (i.tags||[]).forEach(t=> s.add(t)))); (db.images||[]).forEach(i=> (i.tags||[]).forEach(t=> s.add(t))); tagCloud.innerHTML=''; s.forEach(t => { const b = document.createElement('span'); b.className='tag'; b.textContent = t; b.addEventListener('click', ()=>{ search.value = t; render(); }); tagCloud.appendChild(b); }); }
-
-function generateUrlFromQuery(){ const params = new URLSearchParams(location.search); const t = params.get('t'); const id = params.get('id'); const cat = params.get('cat'); if(t && id){ active = t; tabs.forEach(x=>x.classList.remove('active')); const tabEl = Array.from(tabs).find(x=>x.dataset.tab===t); if(tabEl) tabEl.classList.add('active'); if(t==='shayari' && cat){ shayariActiveCategory = cat; rebuildAllCategoriesUI(); } render(); // open first matching item in reader
-    setTimeout(()=>{ // find item by id and open reader
-      const all = [...(db[t]||[]), ...(t==='shayari'? (db.shayari[shayariActiveCategory]||[]) : []), ...(t==='images'? (db.images||[]) : [])];
-      const it = all.find(x=> String(x.id)===String(id));
-      if(it) openReaderFor(it);
-    }, 400);
-  }
-}
-
-function escape(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function debounce(fn,ms){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; }
-
-// simple inline login prompt
-function showLoginPrompt(){ const u = prompt('Owner Username:'); if(u===null) return; const p = prompt('Password:'); if(p===null) return; if(u===OWNER_USER && p===OWNER_PASS){ doLoginProgrammatic(); alert('Login सफल — owner mode on'); } else alert('Invalid credentials'); }
-function doLogout(){ owner=false; sessionStorage.removeItem('ak_owner_active'); renderOwnerControls(); render(); alert('Logged out'); }
-function doLoginProgrammatic(){ owner=true; sessionStorage.setItem('ak_owner_active','1'); updateLastActivity(); renderOwnerControls(); render(); }
-function checkOwnerSessionOnLoad(){ const s = sessionStorage.getItem('ak_owner_active'); if(s){ owner=true; updateLastActivity(); } renderOwnerControls(); }
-function isOwner(){ return owner===true; }
-function updateLastActivity(){ lastActivity = Date.now(); }
-function startInactivityWatcher(){ setInterval(()=>{ if(!isOwner()) return; if(Date.now() - lastActivity > AUTO_LOGOUT_MS){ doLogout(); alert('Auto-logout due to inactivity (3 minutes).'); } }, 1000); }
-
-// initial UI setup
-renderOwnerControls();
-rebuildAllCategoriesUI();
-startInactivityWatcher();
-generateUrlFromQuery();
+// expose some helpers
+window.saveDB = save;
+window.db = db;
 
 </script>
 </body>
